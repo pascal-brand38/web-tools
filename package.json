@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0"
+  },
+  "name": "web-tools",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "helloworld": "gulp helloworld",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pascal-brand38/web-tools.git"
+  },
+  "author": "pascal.brand38@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pascal-brand38/web-tools/issues"
+  },
+  "homepage": "https://github.com/pascal-brand38/web-tools#readme"
+}
