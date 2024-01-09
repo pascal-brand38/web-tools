@@ -1,6 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
+const path = require('path')
 const gulphandlebars = require('gulp-hb');
 
 const _digits2 = (number) => number < 10 ? '0' + number : '' + number
@@ -25,9 +26,19 @@ function createPreprocVariables(args) {
   }
 }
 
+function _parsePartialName(options, file) {
+  // from a partial file, return its base name as the default is strange
+  // when file does not extend with hbs
+  return path.parse(file.path).base
+}
+
 function preproc(args, cb) {
-  return gulphandlebars()
-      .data(args.preprocVariables)
+  const hboptions = {
+    parsePartialName: _parsePartialName
+  }
+  return gulphandlebars( { parsePartialName: _parsePartialName})
+    .partials(args.siteRootdir + '/src/partials/*')
+    .data(args.preprocVariables)
 }
 
 exports.preproc = preproc
