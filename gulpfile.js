@@ -8,15 +8,18 @@ const { buildHtml } = require('./js/buildHtml.js')
 console.log(buildHtml)
 
 // TODO: remove these hard values
-const _siteRootdir = '../web-portfolio'
-const _relativeDst = 'dist'
+const args = {
+  now: new Date(),
+  siteRootdir: '../web-portfolio',
+  relativeDst: 'dist',
+}
 
 function helloworldTask(cb) {
   console.log('Hello World')
   cb()
 }
 
-const buildHtmlTask = (cb) => buildHtml(_siteRootdir, _relativeDst, cb)
+const buildHtmlTask = (cb) => buildHtml(args, cb)
 
 ///////////////////////// Tasks
 // run helloworld task using:  gulp helloworld
