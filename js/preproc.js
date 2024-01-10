@@ -26,6 +26,14 @@ function createPreprocVariables(args) {
   }
 }
 
+// hook to raise an error when a preproc data is not defined
+// cf. https://handlebarsjs.com/examples/hook-helper-missing.html
+function _helperMissing(/* dynamic arguments */) {
+  var options = arguments[arguments.length-1];
+  var args = Array.prototype.slice.call(arguments, 0,arguments.length-1)
+  throw new Error(`Handlebars: unknown ${options.name}(${args})`)
+}
+
 function _parsePartialName(options, file) {
   // from a partial file, return its base name as the default is strange
   // when file does not extend with hbs
@@ -36,8 +44,12 @@ function preproc(args, cb) {
   const hboptions = {
     parsePartialName: _parsePartialName
   }
-  return gulphandlebars( { parsePartialName: _parsePartialName})
+  const hbHelpers = {
+    helperMissing: _helperMissing
+  }
+  return gulphandlebars(hboptions)
     .partials(args.siteRootdir + '/src/partials/*')
+    .helpers(hbHelpers)
     .data(args.preprocVariables)
 }
 
