@@ -19,7 +19,7 @@ const args = {
 }
 
 async function initTask() {
-  args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/gulp-config.json', 'utf8'))
+  args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/src/gulp-config/gulp-config.json', 'utf8'))
   createPreprocVariables(args)
 }
 

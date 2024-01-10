@@ -50,6 +50,7 @@ function preproc(args, cb) {
   return gulphandlebars(hboptions)
     .partials(args.siteRootdir + '/src/partials/*')
     .helpers(hbHelpers)
+    .helpers(args.siteRootdir + '/src/gulp-config/handlebars-helpers.js')
     .data(args.preprocVariables)
 }
 
