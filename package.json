@@ -9,6 +9,7 @@
   "description": "",
   "version": "1.0.0",
   "scripts": {
+    "build": "gulp",
     "helloworld": "gulp helloworld",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

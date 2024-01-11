@@ -14,12 +14,15 @@ console.log(buildHtml)
 
 // TODO: remove these hard values
 const args = {
-  siteRootdir: '../web-portfolio',
+  siteRootdir: 'test-website',
   relativeDst: 'dist',
 }
 
 async function initTask() {
   args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/src/gulp-config/gulp-config.json', 'utf8'))
+  if (args.gulpConfig.config.relativeDst) {
+    args.relativeDst = args.gulpConfig.config.relativeDst
+  }
   createPreprocVariables(args)
 }
 

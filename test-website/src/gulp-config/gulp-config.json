@@ -1,0 +1,10 @@
+{
+  "config": {
+    "dbg": true,
+    "relativeDst": "dist"
+  },
+
+  "preprocVariables": {
+    "sitename": "Portfolio"
+  }
+}
