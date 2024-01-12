@@ -5,6 +5,10 @@
   },
 
   "preprocVariables": {
-    "sitename": "Portfolio"
+    "sitename": "Portfolio",
+
+    "index.hbs": {
+      "title": "Title of the page"
+    }
   }
 }

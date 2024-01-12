@@ -2,7 +2,9 @@
 // MIT License
 
 const path = require('path')
-const gulphandlebars = require('gulp-hb');
+var handlebars = require('handlebars');
+var handlebarsWax = require('handlebars-wax');
+
 
 const _digits2 = (number) => number < 10 ? '0' + number : '' + number
 
@@ -40,18 +42,26 @@ function _parsePartialName(options, file) {
   return path.parse(file.path).base
 }
 
-function preproc(args, cb) {
+function preproc(args, file) {
   const hboptions = {
     parsePartialName: _parsePartialName
   }
   const hbHelpers = {
     helperMissing: _helperMissing
   }
-  return gulphandlebars(hboptions)
+
+  console.log(`preproc ${file.basename}`)
+
+  // file.contents = Buffer.from('PASCAL')
+  let wax = handlebarsWax(handlebars, hboptions)
     .partials(args.siteRootdir + '/src/partials/*')
     .helpers(hbHelpers)
     .helpers(args.siteRootdir + '/src/gulp-config/handlebars-helpers.js')
     .data(args.preprocVariables)
+    .data(args.gulpConfig['index.hbs'])
+
+  let template = wax.compile(file.contents.toString())
+  file.contents = Buffer.from(template(args.gulpConfig.preprocVariables[file.basename]))
 }
 
 exports.preproc = preproc
