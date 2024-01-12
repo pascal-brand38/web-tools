@@ -6,6 +6,7 @@ const gulprename = require("gulp-rename");
 const { preproc } = require('./preproc')
 const gulptap = require('gulp-tap');
 
+// TODO: minify
 function buildHtmlTask(args, cb) {
   const src = args.siteRootdir + '/src/hbs/*.hbs'
   const dst = args.siteRootdir + '/' + args.relativeDst
