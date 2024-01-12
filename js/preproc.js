@@ -26,6 +26,21 @@ function createPreprocVariables(args) {
     // adding private preproc variables
     ...args.gulpConfig.preprocVariables,
   }
+
+  const hboptions = {
+    parsePartialName: _parsePartialName
+  }
+  const hbHelpers = {
+    helperMissing: _helperMissing
+  }
+
+  // file.contents = Buffer.from('PASCAL')
+  args.handlebarswax = handlebarsWax(handlebars, hboptions)
+    .partials(args.siteRootdir + '/src/partials/*')
+    .helpers(hbHelpers)
+    .helpers(args.siteRootdir + '/src/gulp-config/handlebars-helpers.js')
+    .data(args.preprocVariables)
+    .data(args.gulpConfig['index.hbs'])
 }
 
 // hook to raise an error when a preproc data is not defined
@@ -43,24 +58,7 @@ function _parsePartialName(options, file) {
 }
 
 function preproc(args, file) {
-  const hboptions = {
-    parsePartialName: _parsePartialName
-  }
-  const hbHelpers = {
-    helperMissing: _helperMissing
-  }
-
-  console.log(`preproc ${file.basename}`)
-
-  // file.contents = Buffer.from('PASCAL')
-  let wax = handlebarsWax(handlebars, hboptions)
-    .partials(args.siteRootdir + '/src/partials/*')
-    .helpers(hbHelpers)
-    .helpers(args.siteRootdir + '/src/gulp-config/handlebars-helpers.js')
-    .data(args.preprocVariables)
-    .data(args.gulpConfig['index.hbs'])
-
-  let template = wax.compile(file.contents.toString())
+  let template = args.handlebarswax.compile(file.contents.toString())
   file.contents = Buffer.from(template(args.gulpConfig.preprocVariables[file.basename]))
 }
 

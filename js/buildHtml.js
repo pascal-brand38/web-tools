@@ -7,12 +7,11 @@ const { preproc } = require('./preproc')
 const gulptap = require('gulp-tap');
 
 function buildHtmlTask(args, cb) {
-  console.log(cb)
   const src = args.siteRootdir + '/src/hbs/*.hbs'
   const dst = args.siteRootdir + '/' + args.relativeDst
   return gulp.src(src)
     .pipe(gulptap(function (file, t) {
-      return preproc(args, file, cb)
+      return preproc(args, file)
     }))
 
     // .pipe(preproc(args))
