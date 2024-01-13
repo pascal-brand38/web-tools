@@ -37,7 +37,6 @@ function getArgs(argv) {
 async function initTask() {
   const options = getArgs(process.argv)
   args.siteRootdir = options['site-root-dir']
-  console.log(`args.siteRootdir = ${args.siteRootdir}`)
 
   args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/src/gulp-config/gulp-config.json', 'utf8'))
   if (args.gulpConfig.config.relativeDst) {

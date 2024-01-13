@@ -12,19 +12,36 @@ function createPreprocVariables(args) {
   const now = new Date()
   const epoch = Math.round(now.getTime() / 1000);
 
-  args.preprocVariables = {
-    // time and date
-    WEBTOOLS_FILE_VERSION: 'v=' + epoch,
-    WEBTOOLS_EPOCH: epoch,
-    WEBTOOLS_SECOND: _digits2(now.getSeconds()),
-    WEBTOOLS_MINUTE: _digits2(now.getMinutes()),
-    WEBTOOLS_HOUR: _digits2(now.getHours()),
-    WEBTOOLS_YEAR: now.getFullYear(),
-    WEBTOOLS_MONTH: _digits2(now.getMonth()+1),
-    WEBTOOLS_DAY: _digits2(now.getDate()),
+  if (true) {
+    args.preprocVariables = {
+      // time and date
+      WEBTOOLS_FILE_VERSION: 'v=' + epoch,
+      WEBTOOLS_EPOCH: epoch,
+      WEBTOOLS_SECOND: _digits2(now.getSeconds()),
+      WEBTOOLS_MINUTE: _digits2(now.getMinutes()),
+      WEBTOOLS_HOUR: _digits2(now.getHours()),
+      WEBTOOLS_YEAR: now.getFullYear(),
+      WEBTOOLS_MONTH: _digits2(now.getMonth()+1),
+      WEBTOOLS_DAY: _digits2(now.getDate()),
 
-    // adding private preproc variables
-    ...args.gulpConfig.preprocVariables,
+      // adding private preproc variables
+      ...args.gulpConfig.preprocVariables,
+    }
+  } else {
+    args.preprocVariables = {
+      // time and date
+      WEBTOOLS_FILE_VERSION: 'v=1705079331',
+      WEBTOOLS_EPOCH: 1705079331,
+      WEBTOOLS_SECOND: '51',
+      WEBTOOLS_MINUTE: '08',
+      WEBTOOLS_HOUR: '18',
+      WEBTOOLS_YEAR: now.getFullYear(),
+      WEBTOOLS_MONTH: '01',
+      WEBTOOLS_DAY: '12',
+
+      // adding private preproc variables
+      ...args.gulpConfig.preprocVariables,
+    }
   }
 
   const hboptions = {
@@ -58,8 +75,11 @@ function _parsePartialName(options, file) {
 }
 
 function preproc(args, file) {
+  let localFunctions = require('../' + args.siteRootdir + '/src/gulp-config/locals.js')
+  const localPreprocVariables = localFunctions.localPreprocVariables(file)
+
   let template = args.handlebarswax.compile(file.contents.toString())
-  file.contents = Buffer.from(template(args.gulpConfig.preprocVariables[file.basename]))
+  file.contents = Buffer.from(template({...args.gulpConfig.preprocVariables[file.basename], ...localPreprocVariables}))
 }
 
 exports.preproc = preproc
