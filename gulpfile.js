@@ -7,6 +7,7 @@ const { hideBin } = require('yargs/helpers')
 const gulp = require('gulp');
 const { series, parallel } = require('gulp');
 const { buildHtml } = require('./js/buildHtml')
+const { buildCss } = require('./js/buildCss')
 const { createPreprocVariables } = require('./js/preproc')
 
 
@@ -15,6 +16,7 @@ const { createPreprocVariables } = require('./js/preproc')
 // TODO: remove these hard values
 let args = {
   relativeDst: 'dist',
+  webtoolsDir: '/home/pasca/dev/pascal-brand38/web-tools'
 }
 
 function getArgs(argv) {
@@ -54,6 +56,7 @@ function helloworldTask(cb) {
 }
 
 const buildHtmlTask = (cb) => buildHtml(args, cb)
+const buildCssTask = (cb) => buildCss(args, cb)
 
 ///////////////////////// Tasks
 // run helloworld task using:  gulp helloworld
@@ -62,4 +65,5 @@ exports.helloworld = helloworldTask
 exports.default = series(
   initTask,
   buildHtmlTask,
+  buildCssTask,
 )

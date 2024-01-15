@@ -27,7 +27,7 @@ function createPreprocVariables(args) {
       // adding private preproc variables
       ...args.gulpConfig.preprocVariables,
     }
-  } else {
+  } else {      // TODO remove this part
     args.preprocVariables = {
       // time and date
       WEBTOOLS_FILE_VERSION: 'v=1705079331',

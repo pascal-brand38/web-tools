@@ -1,0 +1,28 @@
+// (C) webtools
+//
+//
+
+
+//  small:        from 0px                   to  $webtools-size-m-from - 1px
+//  medium:       from $webtools-size-m-from   to  $webtools-size-l-from - 1px
+//  large:        from $webtools-size-l-from
+
+$webtools-size-m-from:    601px   !default;
+$webtools-size-l-from:    993px   !default;
+
+$webtools-size-s-to:      $webtools-size-m-from - 1;
+$webtools-size-m-to:      $webtools-size-l-from - 1;
+
+
+$webtools-max-width: 1024px;
+
+$webtools-default-margin: 1.75rem;      // default margin to be applied
+$webtools-default-margin-big: 24px;     // default margin to be applied
+
+
+// default fonts and color
+$webtools-primary-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+$webtools-primary-color: Black !default;
+$webtools-primary-background-color: White !default;
+
+/* colors from https://html-color-codes.info/color-names/ */

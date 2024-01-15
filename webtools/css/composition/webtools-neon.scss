@@ -1,0 +1,50 @@
+// from https://freefrontend.com/css-glow-text-effects/
+// and https://codepen.io/markheggan/pen/LjrVYN
+//
+
+// Example:
+//              <div class="webtools-neon">
+//                  Joyeuses <br> Fêtes
+//              </div>
+
+/// Variables
+/// --webtools-neon-RGB: neon color, for example for blue
+///     --webtools-neon-RGB: 0, 0, 255
+/// --webtools-neon-speed: speed the neon is blinking, for example
+///     --webtools-neon-speed: 0.25s
+
+$webtools-neon: true !default;
+
+@if ($webtools-neon) {
+  .webtools-neon {
+      transform: rotate(-20deg);
+      color: rgb(var(--webtools-neon-RGB, 255, 0, 0));
+      animation:
+          webtools-neon-keyframe
+          var(--webtools-neon-speed, 0.25s)
+          ease-in-out infinite alternate;
+  }
+
+  // animation
+
+  @keyframes webtools-neon-keyframe {
+    from {
+      text-shadow:
+      0 0 6px rgba(202,228,225,0.92),
+      0 0 30px rgba(202,228,225,0.34),
+      0 0 12px rgba(var(--webtools-neon-RGB, 255, 0, 0), 0.32),
+      0 0 21px rgba(var(--webtools-neon-RGB, 255, 0, 0), 0.72),
+      0 0 34px rgba(var(--webtools-neon-RGB, 255, 0, 0), 0.58),
+      0 0 54px rgba(var(--webtools-neon-RGB, 255, 0, 0), 0.72);
+    }
+    to {
+      text-shadow:
+      0 0 6px rgba(202,228,225,0.98),
+      0 0 30px rgba(202,228,225,0.42),
+      0 0 12px rgba(var(--webtools-neon-RGB, 255, 0, 0), 0.58),
+      0 0 22px rgba(var(--webtools-neon-RGB, 255, 0, 0), 0.84),
+      0 0 38px rgba(var(--webtools-neon-RGB, 255, 0, 0), 0.88),
+      0 0 60px rgba(var(--webtools-neon-RGB, 255, 0, 0), 1);
+    }
+  }
+}
