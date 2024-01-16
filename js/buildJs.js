@@ -6,9 +6,9 @@ const fs = require('fs');
 
 const gulp = require('gulp');
 const { series, parallel } = require('gulp');
+const { preproc } = require('./preproc')
 
 // npm install sass gulp-sass --save-dev
-const sass = require('gulp-sass')(require('sass'));
 const gulprename = require("gulp-rename");
 // const gulpcontains = require('gulp-contains');
 // const gulpuglify = require('gulp-uglify');
@@ -20,29 +20,17 @@ const gulprename = require("gulp-rename");
 // const gulpHtmlMin = require('gulp-htmlmin');
 // const gulpbabel = require('gulp-babel');
 const gulptap = require('gulp-tap');
+const gulppreprocess = require('gulp-preprocess');
 // const child_process = require('child_process');
 // const readline = require('readline');
 // const ffmpeg = require('fluent-ffmpeg');
 
-
-function buildCss(args, done) {
-  // check options at https://github.com/sass/node-sass#options
-  const sassOptions = {
-    outputStyle: ((true) ? 'expanded' : 'compressed'),   // TODO: depends on dbg
-    includePaths: [
-      args.siteRootdir + '/src/css',
-      './webtools/css',
-      './webtools',
-    ]
-    // from https://sass-lang.com/documentation/js-api/:  style: compressed
-  };
-  // const sassOptions = {};
-
+function buildJs(args, done) {
   var folders = [
-    { src: args.siteRootdir + '/src/css/*.css', dst: args.siteRootdir + '/' + args.relativeDst + '/css', },
-    { src: args.siteRootdir + '/src/css/*.scss', dst: args.siteRootdir + '/' + args.relativeDst + '/css', },
+    { src: args.siteRootdir + '/src/js/*.js', dst: args.siteRootdir + '/' + args.relativeDst + '/js', }
   ]
 
+  // callback to know when this task is completed
   var nbdone = 0;
   function reallydone() {
     nbdone ++;
@@ -53,32 +41,16 @@ function buildCss(args, done) {
 
   folders.forEach(function(folder){
     return gulp.src(folder.src, {"allowEmpty": true})
-      .pipe(gulptap(function (file, t) {
-        console.log(file.basename)
+      .pipe(gulppreprocess({
+          includeBase: 'webtools/js',
       }))
-      .pipe(sass(sassOptions))
+      // .pipe(gulptap(function (file, t) {
+      //   console.log(file.basename)
+      // }))
       .pipe(gulprename(function (path) { path.basename = path.basename + "-min"; }))
       .pipe(gulp.dest(folder.dst))
-
       .on('end', () => reallydone())
   })
+}
 
-
-  // files.forEach(function(element, index) {
-  //   src = element[0]
-  //   dst = element[1]
-  //   return gulp.src(src, {"allowEmpty": true})
-  //   .pipe(preproc.fileSpecific())
-  //   .pipe(gulptap(preproc.builtin))
-  //   .pipe(preproc.specific())
-  //   .pipe(sass(sassOptions))
-  //   .pipe(gulprename(function (path) { path.basename = path.basename + "-min"; }))
-  //   .pipe(gulp.dest(dst))
-  //     .on('end', () => reallydone())
-  //     ;
-  // });
-
-};
-
-
-exports.buildCss = buildCss;
+exports.buildJs = buildJs;

@@ -8,6 +8,7 @@ const gulp = require('gulp');
 const { series, parallel } = require('gulp');
 const { buildHtml } = require('./js/buildHtml')
 const { buildCss } = require('./js/buildCss')
+const { buildJs } = require('./js/buildJs')
 const { createPreprocVariables } = require('./js/preproc')
 
 
@@ -57,6 +58,7 @@ function helloworldTask(cb) {
 
 const buildHtmlTask = (cb) => buildHtml(args, cb)
 const buildCssTask = (cb) => buildCss(args, cb)
+const buildJsTask = (cb) => buildJs(args, cb)
 
 ///////////////////////// Tasks
 // run helloworld task using:  gulp helloworld
@@ -66,4 +68,5 @@ exports.default = series(
   initTask,
   buildHtmlTask,
   buildCssTask,
+  buildJsTask,
 )

@@ -7,7 +7,7 @@ const { preproc } = require('./preproc')
 const gulptap = require('gulp-tap');
 
 // TODO: minify
-function buildHtmlTask(args, cb) {
+function buildHtml(args, cb) {
   const src = args.siteRootdir + '/src/hbs/*.hbs'
   const dst = args.siteRootdir + '/' + args.relativeDst
   return gulp.src(src)
@@ -23,10 +23,6 @@ function buildHtmlTask(args, cb) {
       path.extname = ".html";
     }))
     .pipe(gulp.dest(dst))
-}
-
-function buildHtml(args, cb) {
-  return buildHtmlTask(args, cb)
 }
 
 exports.buildHtml = buildHtml
