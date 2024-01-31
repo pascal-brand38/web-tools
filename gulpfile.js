@@ -66,10 +66,11 @@ const buildImgTask = (cb) => buildImg(args, cb)
 // run helloworld task using:  gulp helloworld
 exports.helloworld = helloworldTask
 
+exports.buildImg = buildImgTask
+
 exports.default = series(
   initTask,
   buildHtmlTask,
   buildCssTask,
   buildJsTask,
-  buildImgTask,
 )
