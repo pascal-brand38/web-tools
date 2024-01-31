@@ -78,7 +78,9 @@ function preproc(args, file) {
   let localFunctions = require('../' + args.siteRootdir + '/src/gulp-config/locals.js')
   const localPreprocVariables = localFunctions.localPreprocVariables(file)
 
-  let template = args.handlebarswax.compile(file.contents.toString())
+  let template = args.handlebarswax
+    .partials(args.siteRootdir + '/tmp/*')
+    .compile(file.contents.toString())
   file.contents = Buffer.from(template({...args.gulpConfig.preprocVariables[file.basename], ...localPreprocVariables}))
 }
 

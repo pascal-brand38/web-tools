@@ -27,7 +27,8 @@ const gulppreprocess = require('gulp-preprocess');
 
 function buildJs(args, done) {
   var folders = [
-    { src: args.siteRootdir + '/src/js/*.js', dst: args.siteRootdir + '/' + args.relativeDst + '/js', }
+    { src: args.siteRootdir + '/src/js/*.js', dst: args.siteRootdir + '/' + args.relativeDst + '/js', extname: '.js'},
+    { src: args.siteRootdir + '/src/hbs/*.js', dst: args.siteRootdir + '/tmp', extname: '.js.hbs'},
   ]
 
   // callback to know when this task is completed
@@ -47,7 +48,10 @@ function buildJs(args, done) {
       // .pipe(gulptap(function (file, t) {
       //   console.log(file.basename)
       // }))
-      .pipe(gulprename(function (path) { path.basename = path.basename + "-min"; }))
+      .pipe(gulprename(function (path) {
+        path.basename = path.basename + "-min"
+        path.extname = folder.extname
+      }))
       .pipe(gulp.dest(folder.dst))
       .on('end', () => reallydone())
   })

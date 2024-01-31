@@ -39,8 +39,9 @@ function buildCss(args, done) {
   // const sassOptions = {};
 
   var folders = [
-    { src: args.siteRootdir + '/src/css/*.css', dst: args.siteRootdir + '/' + args.relativeDst + '/css', },
-    { src: args.siteRootdir + '/src/css/*.scss', dst: args.siteRootdir + '/' + args.relativeDst + '/css', },
+    { src: args.siteRootdir + '/src/css/*.css', dst: args.siteRootdir + '/' + args.relativeDst + '/css', extname: '.css'},
+    { src: args.siteRootdir + '/src/css/*.scss', dst: args.siteRootdir + '/' + args.relativeDst + '/css', extname: '.css'},
+    { src: args.siteRootdir + '/src/hbs/*.scss', dst: args.siteRootdir + '/tmp', extname: '.css.hbs'},
   ]
 
   var nbdone = 0;
@@ -57,7 +58,10 @@ function buildCss(args, done) {
         console.log(file.basename)
       }))
       .pipe(sass(sassOptions))
-      .pipe(gulprename(function (path) { path.basename = path.basename + "-min"; }))
+      .pipe(gulprename(function (path) {
+        path.basename = path.basename + "-min"
+        path.extname = folder.extname
+      }))
       .pipe(gulp.dest(folder.dst))
 
       .on('end', () => reallydone())

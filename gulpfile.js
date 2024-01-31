@@ -70,7 +70,7 @@ exports.buildImg = buildImgTask
 
 exports.default = series(
   initTask,
-  buildHtmlTask,
   buildCssTask,
   buildJsTask,
+  buildHtmlTask,
 )
