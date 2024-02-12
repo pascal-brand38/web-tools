@@ -58,7 +58,9 @@ function buildImgLogo(args, done) {
 
 
 function buildImg(args, done) {
-  const funcs = [ buildImgLogo, buildSprite ]
+  const { buildLocalImg } = require('../' + args.siteRootdir + '/src/gulp-config/buildLocal')
+
+  const funcs = [ buildImgLogo, buildSprite, buildLocalImg ]
   let nbdone = 0;
   function completeTask(e) {
     if (e) {
