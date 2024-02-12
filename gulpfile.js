@@ -10,6 +10,7 @@ const { buildHtml } = require('./js/buildHtml')
 const { buildCss } = require('./js/buildCss')
 const { buildJs } = require('./js/buildJs')
 const { buildImg } = require('./js/buildImg')
+const { build3rdParties } = require('./js/build3rdParties')
 const { createPreprocVariables } = require('./js/preproc')
 
 
@@ -61,6 +62,7 @@ const buildHtmlTask = (cb) => buildHtml(args, cb)
 const buildCssTask = (cb) => buildCss(args, cb)
 const buildJsTask = (cb) => buildJs(args, cb)
 const buildImgTask = (cb) => buildImg(args, cb)
+const build3rdPartiesTask = (cb) => build3rdParties(args, cb)
 
 ///////////////////////// Tasks
 // run helloworld task using:  gulp helloworld
@@ -69,8 +71,7 @@ exports.helloworld = helloworldTask
 exports.buildImg = series(initTask, buildImgTask)
 
 exports.default = series(
-  initTask,
-  buildCssTask,
-  buildJsTask,
+  parallel(initTask),
+  parallel(buildCssTask, buildJsTask, build3rdPartiesTask),
   buildHtmlTask,
 )

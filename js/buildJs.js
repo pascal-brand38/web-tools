@@ -1,5 +1,5 @@
-// https://www.npmjs.com/package/gulp-json-replace
-// https://www.npmjs.com/package/gulp-replace-task
+// Copyright (c) Pascal Brand
+// MIT License
 
 const path = require('path')
 const fs = require('fs');
