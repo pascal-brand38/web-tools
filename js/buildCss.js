@@ -6,7 +6,6 @@ const sass = require('gulp-sass')(require('sass'));
 const gulprename = require("gulp-rename");
 const gulptap = require('gulp-tap');
 
-
 function buildCss(args, done) {
   // check options at https://github.com/sass/node-sass#options
   const sassOptions = {
@@ -18,7 +17,6 @@ function buildCss(args, done) {
     ]
     // from https://sass-lang.com/documentation/js-api/:  style: compressed
   };
-  // const sassOptions = {};
 
   var folders = [
     { src: args.siteRootdir + '/src/css/*.css', dst: args.siteRootdir + '/' + args.relativeDst + '/css', extname: '.css'},
@@ -48,23 +46,6 @@ function buildCss(args, done) {
 
       .on('end', () => reallydone())
   })
-
-
-  // files.forEach(function(element, index) {
-  //   src = element[0]
-  //   dst = element[1]
-  //   return gulp.src(src, {"allowEmpty": true})
-  //   .pipe(preproc.fileSpecific())
-  //   .pipe(gulptap(preproc.builtin))
-  //   .pipe(preproc.specific())
-  //   .pipe(sass(sassOptions))
-  //   .pipe(gulprename(function (path) { path.basename = path.basename + "-min"; }))
-  //   .pipe(gulp.dest(dst))
-  //     .on('end', () => reallydone())
-  //     ;
-  // });
-
 };
-
 
 exports.buildCss = buildCss;
