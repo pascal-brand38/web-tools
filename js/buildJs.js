@@ -6,22 +6,11 @@ const fs = require('fs');
 
 const gulp = require('gulp');
 
-// npm install sass gulp-sass --save-dev
 const gulprename = require("gulp-rename");
-// const gulpcontains = require('gulp-contains');
-// const gulpuglify = require('gulp-uglify');
-// const gulplazypipe = require('lazypipe');
-// const gulpfileinclude = require('gulp-file-include');
-// const gulpjsonreplace = require('gulp-json-replace');
-// const gulpif = require('gulp-if');
-// const gulpminimist = require('minimist');
-// const gulpHtmlMin = require('gulp-htmlmin');
-// const gulpbabel = require('gulp-babel');
 const gulptap = require('gulp-tap');
+const gulpuglify = require('gulp-uglify');
+const gulpif = require('gulp-if');
 const gulppreprocess = require('gulp-preprocess');
-// const child_process = require('child_process');
-// const readline = require('readline');
-// const ffmpeg = require('fluent-ffmpeg');
 
 function buildJs(args, done) {
   var folders = [
@@ -47,6 +36,7 @@ function buildJs(args, done) {
       // .pipe(gulptap(function (file, t) {
       //   console.log(file.basename)
       // }))
+      .pipe(gulpif((args.dbg == false), gulpuglify()))
       .pipe(gulprename(function (path) {
         path.basename = path.basename + "-min"
         path.extname = folder.extname

@@ -1,34 +1,16 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-const path = require('path')
-const fs = require('fs');
-
 const gulp = require('gulp');
-const { series, parallel } = require('gulp');
-
-// npm install sass gulp-sass --save-dev
 const sass = require('gulp-sass')(require('sass'));
 const gulprename = require("gulp-rename");
-// const gulpcontains = require('gulp-contains');
-// const gulpuglify = require('gulp-uglify');
-// const gulplazypipe = require('lazypipe');
-// const gulpfileinclude = require('gulp-file-include');
-// const gulpjsonreplace = require('gulp-json-replace');
-// const gulpif = require('gulp-if');
-// const gulpminimist = require('minimist');
-// const gulpHtmlMin = require('gulp-htmlmin');
-// const gulpbabel = require('gulp-babel');
 const gulptap = require('gulp-tap');
-// const child_process = require('child_process');
-// const readline = require('readline');
-// const ffmpeg = require('fluent-ffmpeg');
 
 
 function buildCss(args, done) {
   // check options at https://github.com/sass/node-sass#options
   const sassOptions = {
-    outputStyle: ((true) ? 'expanded' : 'compressed'),   // TODO: depends on dbg
+    outputStyle: ((args.dbg) ? 'expanded' : 'compressed'),   // TODO: depends on dbg
     includePaths: [
       args.siteRootdir + '/src/css',
       './webtools/css',
