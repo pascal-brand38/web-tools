@@ -13,6 +13,7 @@ function buildRootDir(args, done) {
   var folders = [
     { src: args.siteRootdir + '/src/root-dir/.*', dst: args.siteRootdir + '/' + args.relativeDst},
     { src: args.siteRootdir + '/src/root-dir/*.*', dst: args.siteRootdir + '/' + args.relativeDst},
+    { src: args.siteRootdir + '/src/root-dir/favicon/*', dst: args.siteRootdir + '/' + args.relativeDst},
   ]
 
   // callback to know when this task is completed
@@ -27,11 +28,18 @@ function buildRootDir(args, done) {
   folders.forEach(function(folder){
     return gulp.src(folder.src, {"allowEmpty": true})
       .pipe(gulptap(function (file, t) {
-        return preproc(args, file)
+        if (file._base.endsWith('favicon')) {
+          return file.contents
+        } else {
+          return preproc(args, file)
+        }
       }))
-      .pipe(gulptap(function (file, t) {
-        console.log(file.basename)
-      }))
+      // .pipe(gulptap(function (file, t) {
+      //   if (file.basename === 'android-chrome-192x192.png') {
+      //     console.log(JSON.stringify(file))
+      //   }
+      //   console.log(file.basename)
+      // }))
       .pipe(gulp.dest(folder.dst))
       .on('end', () => reallydone())
   })
