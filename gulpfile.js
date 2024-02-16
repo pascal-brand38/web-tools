@@ -12,6 +12,7 @@ const { buildJs } = require('./js/buildJs')
 const { buildImg } = require('./js/buildImg')
 const { build3rdParties } = require('./js/build3rdParties')
 const { buildRootDir } = require('./js/buildRootDir')
+const { buildPhp } = require('./js/buildPhp')
 const { createPreprocVariables } = require('./js/preproc')
 
 
@@ -65,6 +66,7 @@ const buildJsTask = (cb) => buildJs(args, cb)
 const buildImgTask = (cb) => buildImg(args, cb)
 const build3rdPartiesTask = (cb) => build3rdParties(args, cb)
 const buildRootDirTask = (cb) => buildRootDir(args, cb)
+const buildPhpTask = (cb) => buildPhp(args, cb)
 
 ///////////////////////// Tasks
 // run helloworld task using:  gulp helloworld
@@ -75,6 +77,6 @@ exports.buildRootDir = series(initTask, buildRootDirTask)
 
 exports.default = series(
   parallel(initTask),
-  parallel(buildCssTask, buildJsTask, build3rdPartiesTask, buildRootDirTask),
+  parallel(buildCssTask, buildJsTask, build3rdPartiesTask, buildPhpTask, buildRootDirTask),
   buildHtmlTask,
 )
