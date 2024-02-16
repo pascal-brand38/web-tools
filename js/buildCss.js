@@ -54,9 +54,9 @@ function buildCss(args, done) {
 
   folders.forEach(function(folder){
     return gulp.src(folder.src, {"allowEmpty": true})
-      .pipe(gulptap(function (file, t) {
-        console.log(file.basename)
-      }))
+      // .pipe(gulptap(function (file, t) {
+      //   console.log(file.basename)
+      // }))
       .pipe(sass(sassOptions))
       .pipe(gulprename(function (path) {
         path.basename = path.basename + "-min"

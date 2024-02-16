@@ -53,7 +53,6 @@ function createPreprocVariables(args) {
 
   // file.contents = Buffer.from('PASCAL')
   args.handlebarswax = handlebarsWax(handlebars, hboptions)
-    .partials(args.siteRootdir + '/src/partials/*')
     .helpers(hbHelpers)
     .helpers(args.siteRootdir + '/src/gulp-config/handlebars-helpers.js')
     .data(args.preprocVariables)
@@ -79,6 +78,7 @@ function preproc(args, file) {
   const localPreprocVariables = localFunctions.localPreprocVariables(file)
 
   let template = args.handlebarswax
+    .partials(args.siteRootdir + '/src/partials/*')
     .partials(args.siteRootdir + '/tmp/*')
     .compile(file.contents.toString())
   file.contents = Buffer.from(template({...args.gulpConfig.preprocVariables[file.basename], ...localPreprocVariables}))

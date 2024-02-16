@@ -5,8 +5,6 @@ const path = require('path')
 const fs = require('fs');
 
 const gulp = require('gulp');
-const { series, parallel } = require('gulp');
-const { preproc } = require('./preproc')
 
 // npm install sass gulp-sass --save-dev
 const gulprename = require("gulp-rename");
@@ -29,6 +27,7 @@ function buildJs(args, done) {
   var folders = [
     { src: args.siteRootdir + '/src/js/*.js', dst: args.siteRootdir + '/' + args.relativeDst + '/js', extname: '.js'},
     { src: args.siteRootdir + '/src/hbs/*.js', dst: args.siteRootdir + '/tmp', extname: '.js.hbs'},
+    { src: args.siteRootdir + '/src/root-dir/js/*.js', dst: args.siteRootdir + '/' + args.relativeDst, extname: '.js' },
   ]
 
   // callback to know when this task is completed
