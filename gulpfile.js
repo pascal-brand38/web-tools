@@ -2,9 +2,9 @@
 // MIT License
 
 const fs = require('fs')
+const path = require('path')
 const yargs = require('yargs')
 const { hideBin } = require('yargs/helpers')
-const gulp = require('gulp');
 const { series, parallel } = require('gulp');
 const { buildHtml } = require('./js/buildHtml')
 const { buildCss } = require('./js/buildCss')
@@ -58,6 +58,14 @@ async function initTask() {
     args.relativeDst = args.gulpConfig.config.relativeDst
   }
   createPreprocVariables(args)
+
+  // clear tmp dir
+  const tmp = path.join(args.siteRootdir, 'tmp')
+  for (const file of fs.readdirSync(tmp)) {
+    fs.unlinkSync(path.join(tmp, file));
+  }
+
+  console.log('initTask is completed')
 }
 
 
@@ -88,3 +96,9 @@ exports.default = series(
   parallel(buildCssTask, buildJsTask, build3rdPartiesTask, buildPhpTask, buildRootDirTask),
   buildHtmlTask,
 )
+
+// TODO: Check result:
+// - w3c
+// - dependencies
+// - img...
+//
