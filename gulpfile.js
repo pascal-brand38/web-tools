@@ -37,6 +37,13 @@ function getArgs(argv) {
         required: false,
         alias: 's',
       },
+      "dbg": {
+        description: "debug mode",
+        default: false,
+        requiresArg: false,
+        required: false,
+        boolean: true,
+      },
     })
     .argv;
 }
@@ -44,6 +51,7 @@ function getArgs(argv) {
 async function initTask() {
   const options = getArgs(process.argv)
   args.siteRootdir = options['site-root-dir']
+  args.dbg = options['dbg']
 
   args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/src/gulp-config/gulp-config.json', 'utf8'))
   if (args.gulpConfig.config.relativeDst) {
