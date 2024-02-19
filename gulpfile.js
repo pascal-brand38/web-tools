@@ -13,6 +13,7 @@ const { buildImg } = require('./js/buildImg')
 const { build3rdParties } = require('./js/build3rdParties')
 const { buildRootDir } = require('./js/buildRootDir')
 const { buildPhp } = require('./js/buildPhp')
+const { buildValidate } = require('./js/buildValidate')
 const { createPreprocVariables } = require('./js/preproc')
 
 
@@ -60,9 +61,13 @@ async function initTask() {
   createPreprocVariables(args)
 
   // clear tmp dir
-  const tmp = path.join(args.siteRootdir, 'tmp')
-  for (const file of fs.readdirSync(tmp)) {
-    fs.unlinkSync(path.join(tmp, file));
+  try {
+    const tmp = path.join(args.siteRootdir, 'tmp')
+    for (const file of fs.readdirSync(tmp)) {
+      fs.unlinkSync(path.join(tmp, file));
+    }
+  } catch {
+
   }
 
   console.log('initTask is completed')
@@ -83,6 +88,7 @@ const buildImgTask = (cb) => buildImg(args, cb)
 const build3rdPartiesTask = (cb) => build3rdParties(args, cb)
 const buildRootDirTask = (cb) => buildRootDir(args, cb)
 const buildPhpTask = (cb) => buildPhp(args, cb)
+const buildValidateTask = (cb) => buildValidate(args, cb)
 
 ///////////////////////// Tasks
 // run helloworld task using:  gulp helloworld
@@ -95,6 +101,7 @@ exports.default = series(
   parallel(initTask),
   parallel(buildCssTask, buildJsTask, build3rdPartiesTask, buildPhpTask, buildRootDirTask),
   buildHtmlTask,
+  buildValidateTask,
 )
 
 // TODO: Check result:

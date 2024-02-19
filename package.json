@@ -12,6 +12,7 @@
     "handlebars": "^4.7.8",
     "handlebars-wax": "^6.1.0",
     "sass": "^1.69.7",
+    "w3c-html-validator": "^1.6.4",
     "yargs": "^17.7.2"
   },
   "name": "web-tools",

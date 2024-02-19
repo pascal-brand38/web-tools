@@ -4,11 +4,6 @@
 const gulp = require('gulp');
 const gulprename = require('gulp-rename');
 
-function folder(file) {
-  console.log(file)
-  return undefined
-}
-
 function build3rdParties(args, done) {
   return gulp.src('webtools/3rdparties/**/*.{js,css}', {"allowEmpty": true})
     .pipe(gulprename(function (path) { path.dirname = path.extname.slice(start=1); }))
