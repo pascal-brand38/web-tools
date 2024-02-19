@@ -3,7 +3,7 @@
 
 const gulp = require('gulp');
 const gulprename = require("gulp-rename");
-const { preproc } = require('./preproc')
+const { preprocHandlebars } = require('./preproc')
 const gulptap = require('gulp-tap');
 const gulpif = require('gulp-if');
 const gulpHtmlMin = require('gulp-htmlmin');
@@ -25,7 +25,7 @@ function buildHtml(args, cb) {
   const dst = args.siteRootdir + '/' + args.relativeDst
   return gulp.src(src)
     .pipe(gulptap(function (file, t) {
-      return preproc(args, file)
+      return preprocHandlebars(args, file)
     }))
     .pipe(gulpif((args.dbg == false), gulpHtmlMin(optionsHtmlMin)))
     .pipe(gulprename(function (path) {

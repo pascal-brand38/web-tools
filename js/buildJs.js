@@ -11,6 +11,7 @@ const gulptap = require('gulp-tap');
 const gulpuglify = require('gulp-uglify');
 const gulpif = require('gulp-if');
 const gulppreprocess = require('gulp-preprocess');
+const { preprocHandlebars } = require('./preproc')
 
 function buildJs(args, done) {
   var folders = [
@@ -31,7 +32,10 @@ function buildJs(args, done) {
   folders.forEach(function(folder){
     return gulp.src(folder.src, {"allowEmpty": true})
       .pipe(gulppreprocess({
-          includeBase: 'webtools/js',
+          includeBase: 'webtools/js',   // used to have directives:  // @include webtools.js
+      }))
+      .pipe(gulptap(function (file, t) {
+        return preprocHandlebars(args, file)
       }))
       // .pipe(gulptap(function (file, t) {
       //   console.log(file.basename)

@@ -7,7 +7,7 @@ const fs = require('fs');
 const gulp = require('gulp');
 
 const gulptap = require('gulp-tap');
-const { preproc } = require('./preproc')
+const { preprocHandlebars } = require('./preproc')
 
 function buildRootDir(args, done) {
   var folders = [
@@ -31,7 +31,7 @@ function buildRootDir(args, done) {
         if (file._base.endsWith('favicon')) {
           return file.contents
         } else {
-          return preproc(args, file)
+          return preprocHandlebars(args, file)
         }
       }))
       // .pipe(gulptap(function (file, t) {

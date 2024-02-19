@@ -5,6 +5,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const gulprename = require("gulp-rename");
 const gulptap = require('gulp-tap');
+const { preprocHandlebars } = require('./preproc')
 
 function buildCss(args, done) {
   // check options at https://github.com/sass/node-sass#options
@@ -37,6 +38,9 @@ function buildCss(args, done) {
       // .pipe(gulptap(function (file, t) {
       //   console.log(file.basename)
       // }))
+      .pipe(gulptap(function (file, t) {
+        return preprocHandlebars(args, file)
+      }))
       .pipe(sass(sassOptions))
       .pipe(gulprename(function (path) {
         path.basename = path.basename + "-min"
