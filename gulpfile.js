@@ -67,10 +67,8 @@ async function initTask() {
       fs.unlinkSync(path.join(tmp, file));
     }
   } catch {
-
+    // in case tmp dir does not exist
   }
-
-  console.log('initTask is completed')
 }
 
 

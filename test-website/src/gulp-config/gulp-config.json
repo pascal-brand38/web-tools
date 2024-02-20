@@ -4,6 +4,10 @@
     "relativeDst": "dist"
   },
 
+  "w3cHtmlValidateExcludeList": [
+    { "prop": "message", "str": "Start tag seen without seeing a doctype first" }
+    ],
+
   "preprocVariables": {
     "sitename": "Portfolio",
 
