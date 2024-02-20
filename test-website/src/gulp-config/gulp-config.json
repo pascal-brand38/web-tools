@@ -4,9 +4,10 @@
     "relativeDst": "dist"
   },
 
-  "w3cHtmlValidateExcludeList": [
-    { "prop": "message", "str": "Start tag seen without seeing a doctype first" }
-    ],
+  "w3cMarkupValidate": [
+    { "ext": ".html", "prop": "message", "str": "Start tag seen without seeing a doctype first" },
+    { "ext": ".css", "prop": "message", "str": "Property “pointer-events” doesn't exist" }
+  ],
 
   "preprocVariables": {
     "sitename": "Portfolio",
