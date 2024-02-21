@@ -87,16 +87,17 @@ function webtools_onload() {
 }
 window.onload = webtools_onload;
 
+let _dot = '.'
 
 // Service workers
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('service_worker-min.js').then(function(registration) {
+    navigator.serviceWorker.register('service_worker-min' + _dot + 'js').then(function(registration) {
       // Registration was successful
     }, function(err) {
       // registration failed :(
       console.log('ServiceWorker registration failed: ', err);
-      console.log('Cannot open file service_worker-min.js');
+      console.log(`Cannot open file service_worker-min${_dot}js`);
     });
   });
 }
