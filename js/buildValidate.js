@@ -6,7 +6,6 @@ const path = require('path')
 const validator = require('html-validator')
 const cssValidator = require('w3c-css-validator');
 
-
 async function w3cMarkupValidate(ext, str, excludeList) {
   let results = []
   if (ext === '.html') {
@@ -83,21 +82,43 @@ async function buildValidateNoMorePreproc(args) {
   })
 }
 
+// TODO: optimize as always looking at the same dirs
+function fileExistsWithCaseSync(filepath) {
+  var dir = path.dirname(filepath)
+  if (dir === path.dirname(dir)) {
+    return true
+  }
+  var filenames = fs.readdirSync(dir)
+  const basename = path.basename(filepath)
+  if (basename !== '..' && filenames.indexOf(path.basename(filepath)) === -1) {
+    return false
+  }
+  return fileExistsWithCaseSync(dir)
+}
 
 async function buildValidateDependencies(args) {
   const dir = args.siteRootdir + '/' + args.relativeDst
   const files = fs.readdirSync(dir, { recursive: true })
   // const files = [ 'index.html', 'css/papadamcats-min.css' ]
+  const extList = [ 'png', 'jpg', 'webp', 'gif', 'ico', 'svg', 'css', 'js' ]
+  let reStr = undefined
+  extList.forEach(e => {
+    if (reStr) {
+      reStr += '|'
+    }
+    reStr += '\\.' + e
+  })
+  const re = new RegExp(reStr,"gi")
 
-  const allErrors = await Promise.all(files.map(async (file) => {
-    let errors = []
+
+  let error = false
+  await Promise.all(files.map(async (file) => {
     const ext = path.extname(file)
     if ((ext === '.html') || (ext === '.css') || (ext === '.js')) {
       const fileDir = path.dirname(file)
 
       const fullPath = path.join(dir, file)
       const content = fs.readFileSync(fullPath).toString()
-      const re = new RegExp('\\.JPG|\\.WEBP|\\.JS',"gi")
 
       var match, matches = [];
 
@@ -116,29 +137,37 @@ async function buildValidateDependencies(args) {
           // TODO: CHECK IT EXISTS
           // TODO: CHECK LOCAL IS OK WHEN ON THE SITE TO DISTRIBUTE
           // TODO: CHECK HTTPS IS USED WHEN DISTRIBUTION ON HTTPS
-          res = ''
         } else if (dep.startsWith('http://')) {
-          res = ''
         } else if (dep.length === match[0].length) {
-          res = ''    // we have found .jpg for example, which can be the case in js when building image names
+          // we have found .jpg for example, which can be the case in js when building image names
         } else {
+          // checking with
+          //    if (!fs.existsSync(depPath) || !fs.lstatSync(depPath).isFile())
+          // is case insensitive on windows, so Myimg.jpg and myimg.jpg are the same
+          // use fileExistsWithCaseSync instead
           const depPath = path.join(dir, fileDir, dep)
-          if (!fs.existsSync(depPath) || !fs.lstatSync(depPath).isFile()) {
-            res = 'DOES NOT EXIST'
+          if (!fileExistsWithCaseSync(depPath) || !fs.lstatSync(depPath).isFile()) {
+            res = `${depPath} NOT FOUND`
           }
         }
+
         if (res !== '') {
-          console.log(`${dep} ${res} from ${file}`)
+          console.log(`${res} from ${file}`)
+          error = true
         }
       }
     }
   }))
+
+  if (error && !args.dbg) {
+    throw('ERROR in buildValidateDependencies')
+  }
 }
 
 async function buildValidate(args, done) {
   await Promise.all([
-    // buildValidateMarkup(args),
-    // buildValidateNoMorePreproc(args),
+    buildValidateMarkup(args),
+    buildValidateNoMorePreproc(args),
     buildValidateDependencies(args),
   ])
 }
