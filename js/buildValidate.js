@@ -128,22 +128,29 @@ async function buildValidateDependencies(args) {
 
   let error = false
   await Promise.all(files.map(async (file) => {
-    const ext = path.extname(file)
-    if ((ext === '.html') || (ext === '.css') || (ext === '.js')) {
+    const fileExt = path.extname(file)
+    if ((fileExt === '.html') || (fileExt === '.css') || (fileExt === '.js')) {
       const fileDir = path.dirname(file)
 
       const fullPath = path.join(dir, file)
       const content = fs.readFileSync(fullPath).toString()
 
-      var match, matches = [];
+      var match;
 
       while ((match = re.exec(content)) != null) {    // https://stackoverflow.com/questions/3365902/search-for-all-instances-of-a-string-inside-a-string
-        matches.push(match.index)
-        // console.log(match[0], match.index)
+        const foundExt = match[0]
+        const foundIndex = match.index
 
-        const endIndex = match.index + match[0].length
+        const endIndex = foundIndex + foundExt.length
         const startIndex = Math.max(0, endIndex-256)
         const text = content.slice(startIndex, endIndex)
+
+        if ((fileExt === '.js') && (!'\'`"'.includes(content[endIndex]))) {
+          // in js, .css can be the name of variables.
+          // this is why we check the ends is a string
+          continue
+        }
+
         // console.log('CONTENT: ' + text)
         const lastRegEx = new RegExp('[/a-z0-9\-\.\:\_]+$','gi')
         const found = lastRegEx.exec(text)
@@ -155,7 +162,7 @@ async function buildValidateDependencies(args) {
           // TODO: CHECK LOCAL IS OK WHEN ON THE SITE TO DISTRIBUTE
           // TODO: CHECK HTTPS IS USED WHEN DISTRIBUTION ON HTTPS
         } else if (dep.startsWith('http://')) {
-        } else if (dep.length === match[0].length) {
+        } else if ((dep.length === foundExt.length) && (fileExt === '.js')) {
           // we have found .jpg for example, which can be the case in js when building image names
         } else {
           // checking with
