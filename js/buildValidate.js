@@ -166,7 +166,7 @@ async function buildValidateDependencies(args) {
 
 async function buildValidate(args, done) {
   await Promise.all([
-    buildValidateMarkup(args),
+    (args.w3c) ? buildValidateMarkup(args) : undefined,
     buildValidateNoMorePreproc(args),
     buildValidateDependencies(args),
   ])

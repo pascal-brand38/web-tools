@@ -45,6 +45,13 @@ function getArgs(argv) {
         required: false,
         boolean: true,
       },
+      "w3c": {
+        description: "w3c validation, as may take time",
+        default: true,
+        requiresArg: false,
+        required: false,
+        boolean: true,
+      },
     })
     .argv;
 }
@@ -53,6 +60,7 @@ async function initTask() {
   const options = getArgs(process.argv)
   args.siteRootdir = options['site-root-dir']
   args.dbg = options['dbg']
+  args.w3c = options['w3c']
 
   args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/src/gulp-config/gulp-config.json', 'utf8'))
   if (args.gulpConfig.config.relativeDst) {
