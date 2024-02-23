@@ -82,15 +82,30 @@ async function buildValidateNoMorePreproc(args) {
   })
 }
 
-// TODO: optimize as always looking at the same dirs
+let readdirSyncCacheList = []
+
+function readdirSyncCache(dir) {
+  const cache = readdirSyncCacheList.filter(e => e.dir === dir)
+  if (cache.length == 1) {
+    return cache[0].filenames
+  }
+
+  const filenames = fs.readdirSync(dir)
+  readdirSyncCacheList.push({
+    dir: dir,
+    filenames: filenames,
+  })
+  return filenames
+}
+
 function fileExistsWithCaseSync(filepath) {
   var dir = path.dirname(filepath)
   if (dir === path.dirname(dir)) {
     return true
   }
-  var filenames = fs.readdirSync(dir)
+  const filenames = readdirSyncCache(dir)
   const basename = path.basename(filepath)
-  if (basename !== '..' && filenames.indexOf(path.basename(filepath)) === -1) {
+  if (basename !== '..' && filenames.indexOf(basename) === -1) {
     return false
   }
   return fileExistsWithCaseSync(dir)
@@ -126,12 +141,14 @@ async function buildValidateDependencies(args) {
         matches.push(match.index)
         // console.log(match[0], match.index)
 
-        const text = content.slice(0, match.index + match[0].length)
+        const endIndex = match.index + match[0].length
+        const startIndex = Math.max(0, endIndex-256)
+        const text = content.slice(startIndex, endIndex)
         // console.log('CONTENT: ' + text)
         const lastRegEx = new RegExp('[/a-z0-9\-\.\:\_]+$','gi')
-        const start = lastRegEx.exec(text)
+        const found = lastRegEx.exec(text)
 
-        const dep = text.slice(start.index)
+        const dep = text.slice(found.index)
         let res = ''
         if (dep.startsWith('https://')) {
           // TODO: CHECK IT EXISTS
