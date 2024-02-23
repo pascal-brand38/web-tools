@@ -151,7 +151,6 @@ async function buildValidateDependencies(args) {
           continue
         }
 
-        // console.log('CONTENT: ' + text)
         const lastRegEx = new RegExp('[/a-z0-9\-\.\:\_]+$','gi')
         const found = lastRegEx.exec(text)
 
