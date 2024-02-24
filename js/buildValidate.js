@@ -114,11 +114,12 @@ function fileExistsWithCaseSync(filepath) {
 async function buildValidateDependencies(args) {
   const dir = args.siteRootdir + '/' + args.relativeDst
   const files = fs.readdirSync(dir, { recursive: true })
-  // const files = [ 'index.html', 'css/papadamcats-min.css' ]
-  const extList = [ 'png', 'jpg', 'webp', 'gif', 'ico', 'svg', 'css', 'js' ]
-  let reStr = undefined
+  // const files = [ 'index.html' ]
+  const extList = [ 'png', 'jpg', 'webp', 'gif', 'ico', 'svg', 'css', 'js', 'php' ]
+  // const extList = [ 'png' ]
+  let reStr = ''
   extList.forEach(e => {
-    if (reStr) {
+    if (reStr !== '') {
       reStr += '|'
     }
     reStr += '\\.' + e
@@ -129,7 +130,7 @@ async function buildValidateDependencies(args) {
   let error = false
   await Promise.all(files.map(async (file) => {
     const fileExt = path.extname(file)
-    if ((fileExt === '.html') || (fileExt === '.css') || (fileExt === '.js')) {
+    if ((fileExt === '.html') || (fileExt === '.css') || (fileExt === '.js') || (fileExt === '.php')) {
       const fileDir = path.dirname(file)
 
       const fullPath = path.join(dir, file)
@@ -169,7 +170,11 @@ async function buildValidateDependencies(args) {
           // is case insensitive on windows, so Myimg.jpg and myimg.jpg are the same
           // use fileExistsWithCaseSync instead
           const depPath = path.join(dir, fileDir, dep)
-          if (!fileExistsWithCaseSync(depPath) || !fs.lstatSync(depPath).isFile()) {
+          try {
+            if (!fileExistsWithCaseSync(depPath) || !fs.lstatSync(depPath).isFile()) {
+              res = `${depPath} NOT FOUND`
+            }
+          } catch {
             res = `${depPath} NOT FOUND`
           }
         }
