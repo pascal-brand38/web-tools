@@ -7,7 +7,10 @@ const validator = require('html-validator')
 const cssValidator = require('w3c-css-validator');
 
 async function w3cMarkupValidate(ext, str, excludeList) {
-  let results = []
+  if (str.length === 0) {
+    return []
+  }
+  let results
   if (ext === '.html') {
     const validatorOptions = {
       //validator: 'WHATWG',    // local validation, without sending data to w3c - https://www.npmjs.com/package/html-validator#whatwg
@@ -47,9 +50,9 @@ async function buildValidateMarkup(args) {
       errors = await w3cMarkupValidate(ext, content, excludeList)
     }
 
-    if ((errors) && (errors.length != 0)) {
+      if ((errors) && (errors.length != 0)) {
       return { file: file, errors: errors }
-    }
+      }
   }))
 
   const errors = allErrors.filter(r => r!==undefined)
