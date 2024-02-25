@@ -5,15 +5,16 @@
 @import "webtools/utility/default-values.scss";
 
 // overload the values, and set new ones
-/* colors */
+
+// colors
 $webtools-secondary-color: #95bd0f;
 $webtools-primary-background-color: FloralWhite;
 $webtools-secondary-background-color: #95bd0f;
 $webtools-tertiary-background-color: #84a80d;
 
-/* fonts */
-$webtools-secondary-font-family: 'Kalam', cursive;
-$webtools-tertiary-font-family: 'Kalam', cursive;
+// fonts
+$webtools-secondary-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;    // Handwritten from https://modernfontstacks.com/
+$webtools-tertiary-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 
 @import "webtools/utility/reset.scss";
 @import "webtools/layout/layout.scss";

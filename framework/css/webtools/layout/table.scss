@@ -11,7 +11,7 @@ table.webtools {
   border-collapse: collapse;
   border-spacing: 0;
   border: none;
-  margin-bottom: 0.88rem;
+  margin-bottom: $webtools-default-margin-normal;
 
   td,  th {
     padding-top: 1rem;

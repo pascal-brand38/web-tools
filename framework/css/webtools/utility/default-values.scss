@@ -1,6 +1,8 @@
-// (C) webtools
+// Copyright (c) Pascal Brand
+// MIT License
 //
-//
+// webtools framework utility:
+//    default values, that can be overwritten
 
 
 //  small:        from 0px                   to  $webtools-size-m-from - 1px
@@ -14,15 +16,15 @@ $webtools-size-s-to:      $webtools-size-m-from - 1;
 $webtools-size-m-to:      $webtools-size-l-from - 1;
 
 
-$webtools-max-width: 1024px;
+$webtools-max-width: 1024px !default;
 
-$webtools-default-margin: 1.75rem;      // default margin to be applied
-$webtools-default-margin-big: 24px;     // default margin to be applied
+$webtools-default-margin-big: 24px !default;     // default margin to be applied
+$webtools-default-margin-normal: 0.88rem !default;     // default margin to be applied
 
 
-// default fonts and color
-$webtools-primary-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+// default fonts and colors
+// - fonts: https://modernfontstacks.com/
+// - colors from https://html-color-codes.info/color-names/
+$webtools-primary-font-family: system-ui, sans-serif !default;
 $webtools-primary-color: Black !default;
 $webtools-primary-background-color: White !default;
-
-/* colors from https://html-color-codes.info/color-names/ */

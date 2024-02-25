@@ -13,15 +13,15 @@
   }
 
   p {
-    margin-top: 0.88rem;
-    margin-bottom: 0.88rem;
+    margin-top: $webtools-default-margin-normal;
+    margin-bottom: $webtools-default-margin-normal;
   }
 
   ul {
     list-style: disc;       // inside so that the disc is inside the div, not outside
     margin-left: 1em;       // https://stackoverflow.com/questions/11556493/second-line-in-li-starts-under-the-bullet-after-css-reset
     padding-left: 0.5ch;    // add 0.5ch, otherwise helf of the disc is outside the div
-    margin-bottom: 0.88rem;
+    margin-bottom: $webtools-default-margin-normal;
   }
 
   &--no-margin {
@@ -31,8 +31,8 @@
 }
 
 .webtools-margin-p {
-  margin-top: 0.88rem;
-  margin-bottom: 0.88rem;
+  margin-top: $webtools-default-margin-normal;
+  margin-bottom: $webtools-default-margin-normal;
 }
 
 // Horizontal line
@@ -53,9 +53,4 @@ h1, h2, h3 {
   text-align: left;
   margin: 1.67rem 0 1.67rem 0;
   margin-bottom: 1.67rem;
-}
-
-h3 {
-  font-size: 1.65rem;
-  margin: 1.3rem 0 1.3rem 0;
 }
