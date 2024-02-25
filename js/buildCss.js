@@ -12,9 +12,9 @@ function buildCss(args, done) {
   const sassOptions = {
     outputStyle: ((args.dbg) ? 'expanded' : 'compressed'),   // TODO: depends on dbg
     includePaths: [
-      args.siteRootdir + '/src/css',
-      './webtools/css',
-      './webtools',
+      args.siteRootdir + '/src/css',    // used to  @import "mycss.scss"
+      './framework/css',                // used to  @import "webtools/utility/aspect-ratio.scss";
+      './framework',                    // used to  @import "3rdparties/splide/splide-core.min";
     ]
     // from https://sass-lang.com/documentation/js-api/:  style: compressed
   };

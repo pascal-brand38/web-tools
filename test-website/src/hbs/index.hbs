@@ -4,19 +4,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>Webtools</title>
+
+  <link href="css/webtools-site-min.css?{{{WEBTOOLS_FILE_VERSION}}}" type="text/css" rel="stylesheet" media="all"/>
 </head>
 
 <body>
-  <h1>Portfolio </h1>
+
+  <section class="webtools-container">
+
+  <h1>Webtools description</h1>
 
   <p>
-    Will follow as a portfolio {{WEBTOOLS_HOUR}}
+    Webtools is a framework to ease building static website.
+    It includes
+  <ul>
+    <li> preprocessor capabilities, include of common parts of the website,</li>
+    <li> minification of files, </li>
+    <li> image optimization, </li>
+    <li>and automatic validation of the built website.</li>
+  </ul>
   </p>
 
-  {{{helloworld 'First line' 'Second line' }}}
+  <h2> Installation </h2>
+  <p>
 
-  {{> footer.hbs }}
+    Install the sources: the framework, as well as the test website (this one!)
+    <code>
+      git clone https://github.com/pascal-brand38/webtools.git
+    </code>
+  </p>
+
+  <p>
+    Install dependencies:
+    <code>
+      npm install
+    </code>
+  </p>
+  </section>
 </body>
 
 </html>

@@ -32,7 +32,7 @@ function buildJs(args, done) {
   folders.forEach(function(folder){
     return gulp.src(folder.src, {"allowEmpty": true})
       .pipe(gulppreprocess({
-          includeBase: 'webtools/js',   // used to have directives:  // @include webtools.js
+          includeBase: 'framework/js',   // used to have directives:  // @include webtools/webtools.js
       }))
       .pipe(gulptap(function (file, t) {
         return preprocHandlebars(args, file)

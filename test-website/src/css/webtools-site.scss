@@ -1,0 +1,24 @@
+// Copyright (c) Pascal Brand
+// MIT License
+
+// import default values
+@import "webtools/utility/default-values.scss";
+
+// overload the values, and set new ones
+/* colors */
+$webtools-secondary-color: #95bd0f;
+$webtools-primary-background-color: FloralWhite;
+$webtools-secondary-background-color: #95bd0f;
+$webtools-tertiary-background-color: #84a80d;
+
+/* fonts */
+$webtools-secondary-font-family: 'Kalam', cursive;
+$webtools-tertiary-font-family: 'Kalam', cursive;
+
+@import "webtools/utility/reset.scss";
+@import "webtools/layout/layout.scss";
+
+
+code {
+  display: block;
+}
