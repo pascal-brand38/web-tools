@@ -7,40 +7,208 @@
   <title>Webtools</title>
 
   <link href="css/webtools-site-min.css?{{{WEBTOOLS_FILE_VERSION}}}" type="text/css" rel="stylesheet" media="all"/>
+
+  <style>
+    {{>index-min.css.hbs }}
+  </style>
+
 </head>
 
 <body>
 
   <section class="webtools-container">
 
-  <h1>Webtools description</h1>
+    <h1>Webtools description</h1>
 
-  <p>
-    Webtools is a framework to ease building static website.
-    It includes
-  <ul>
-    <li> preprocessor capabilities, include of common parts of the website,</li>
-    <li> minification of files, </li>
-    <li> image optimization, </li>
-    <li>and automatic validation of the built website.</li>
-  </ul>
-  </p>
+    <p>
+      Webtools is a framework to ease building static website.
+      It includes
+    <ul>
+      <li> preprocessor capabilities, include of common parts of the website,</li>
+      <li> minification of files, </li>
+      <li> image optimization, </li>
+      <li>and automatic validation of the built website.</li>
+    </ul>
+    </p>
 
-  <h2> Installation </h2>
-  <p>
+    <h2> Installation </h2>
+    <p>
 
-    Install the sources: the framework, as well as the test website (this one!)
-    <code>
-      git clone https://github.com/pascal-brand38/webtools.git
-    </code>
-  </p>
+      Install the sources: the framework, as well as the test website (this one!)
+      <code>
+        git clone https://github.com/pascal-brand38/webtools.git
+      </code>
+    </p>
 
-  <p>
-    Install dependencies:
-    <code>
-      npm install
-    </code>
-  </p>
+    <p>
+      Install dependencies:
+      <code>
+        npm install
+      </code>
+    </p>
+
+    <div class="local-grid-2">
+      <div style="width: fit-content; block-size: fit-content; margin:auto;">
+        <div class="webtools-neon webtools-secondary-font-family webtools-font-size-190-bold">
+          Neon <br> Effect
+        </div>
+      </div>
+      <div>
+        <div>
+          <div class="code">
+            <div style="position: relative; left: 10px; top: -10px;"> PASCAL </div>
+          <pre  style="position: relative;">
+// colors of the neon
+$webtools-neon-R: 0;
+$webtools-neon-G: 0;
+$webtools-neon-B: 255;
+// animation speed
+$webtools-neon-speed: 0.50s !default;
+@import "webtools/composition/neon.scss";
+          </pre>
+        </div>
+        </div>
+        <div>
+          <pre>
+&lt;div class="webtools-neon"&gt;
+  Neon &lt;br&gt; Effect
+&lt;/div&gt;
+              </pre>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="local-grid-2">
+      <!-- the effect to demonstrate -->
+      <div style="width: fit-content; block-size: fit-content; margin:auto;">
+        <div class="webtools-neon webtools-secondary-font-family webtools-font-size-190-bold">
+          Neon <br> Effect
+        </div>
+      </div>
+
+      <!-- the code - tabs from https://codepen.io/alvarotrigo/pen/QWqXYmG -->
+<article>
+  <nav>
+    <!-- added inputs and labels for this demo -->
+    <label for="tab1-1">hbs / html
+      <input type="radio" name="radiotabs1" id="tab1-1" checked>
+    </label>
+
+    <label for="tab2-1">scss
+      <input type="radio" name="radiotabs1" id="tab2-1">
+    </label>
+
+    <label for="tab3-1">js
+      <input type="radio" name="radiotabs1" id="tab3-1">
+    </label>
+
+    <label for="tab4-1">
+      <input type="radio" name="radiotabs1" id="tab4-1">
+    </label>
+  </nav>
+
+  <!-- this extra wapper is needed to solve this without script -->
+  <div>
+    <section>
+<pre>
+&lt;div class="webtools-neon"&gt;
+  Neon &lt;br&gt; Effect
+&lt;/div&gt;
+</pre>
+    </section>
+    <section>
+          <pre>
+// colors of the neon
+$webtools-neon-R: 0;
+$webtools-neon-G: 0;
+$webtools-neon-B: 255;
+// animation speed
+$webtools-neon-speed: 0.50s !default;
+@import "webtools/composition/neon.scss";
+          </pre>
+    </section>
+    <section>
+    </section>
+    <section>
+    </section>
+  </div>
+</article>
+
+    </div>
+
+
+    </div>
+
+
+
+    <div class="local-grid-2">
+      <!-- the effect to demonstrate -->
+      <div style="width: fit-content; block-size: fit-content; margin:auto;">
+        <div class="webtools-neon webtools-secondary-font-family webtools-font-size-190-bold">
+          Neon <br> Effect
+        </div>
+      </div>
+
+      <!-- the code - tabs from https://codepen.io/alvarotrigo/pen/QWqXYmG -->
+<article>
+  <nav>
+    <!-- added inputs and labels for this demo -->
+    <label for="tab1-2">hbs / html
+      <input type="radio" name="radiotabs2" id="tab1-2">
+    </label>
+
+    <label for="tab2-2">scss
+      <input type="radio" name="radiotabs2" id="tab2-2" checked>
+    </label>
+
+    <label for="tab3-2">js
+      <input type="radio" name="radiotabs2" id="tab3-2">
+    </label>
+
+    <label for="tab4-2">
+      <input type="radio" name="radiotabs2" id="tab4-2">
+    </label>
+  </nav>
+
+  <!-- this extra wapper is needed to solve this without script -->
+  <div>
+    <section id="stab1">
+<pre>
+&lt;div class="webtools-neon"&gt;
+  Neon &lt;br&gt; Effect
+&lt;/div&gt;
+</pre>
+    </section>
+    <section id="stab2">
+          <pre>
+// colors of the neon
+$webtools-neon-R: 0;
+$webtools-neon-G: 0;
+$webtools-neon-B: 255;
+// animation speed
+$webtools-neon-speed: 0.50s !default;
+@import "webtools/composition/neon.scss";
+          </pre>
+    </section>
+    <section id="stab3">
+    </section>
+    <section id="stab4">
+    </section>
+  </div>
+</article>
+
+    </div>
+
+
+    </div>
+
+<p>
+  TOTO
+</p>
+
+
   </section>
 </body>
 
