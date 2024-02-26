@@ -13,10 +13,10 @@
 // and https://codepen.io/markheggan/pen/LjrVYN
 
 
-$webtools-neon: true !default;                                      // when false, nothing is declared
-$webtools-neon-RGB: var(--webtools-neon-RGB, 255, 0, 0) !default;   // RGB color
-$webtools-neon-speed: var(--webtools-neon-speed, 0.25s) !default;   // blinking speed
-$webtools-neon-rotate: var(--webtools-neon-rotate, -20deg) !default;   // blinking speed
+$webtools-neon: true !default;                                        // when false, nothing is declared
+$webtools-neon-RGB: var(--webtools-neon-RGB, 255, 0, 0) !default;     // RGB color
+$webtools-neon-speed: var(--webtools-neon-speed, 0.25s) !default;     // blinking speed
+$webtools-neon-rotate: var(--webtools-neon-rotate, -20deg) !default;  // blinking rotation angle
 
 @if ($webtools-neon) {
   .webtools-neon {
