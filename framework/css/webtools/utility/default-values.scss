@@ -2,25 +2,24 @@
 // MIT License
 //
 // webtools framework utility:
-//    default values, that can be overwritten
+//    default values, to be overwritten
 
-
-//  small:        from 0px                   to  $webtools-size-m-from - 1px
-//  medium:       from $webtools-size-m-from   to  $webtools-size-l-from - 1px
-//  large:        from $webtools-size-l-from
-
+// screen size to have rendering depending on the screen size
+// using media queries, such as
+//     @media only screen and (min-width: $webtools-size-l-from) {
+//  small screen:   from 0px                    to  $webtools-size-m-from - 1px
+//  medium screen:  from $webtools-size-m-from  to  $webtools-size-l-from - 1px
+//  large screen:   from $webtools-size-l-from
 $webtools-size-m-from:    601px   !default;
 $webtools-size-l-from:    993px   !default;
-
 $webtools-size-s-to:      $webtools-size-m-from - 1;
 $webtools-size-m-to:      $webtools-size-l-from - 1;
 
-
 $webtools-max-width: 1024px !default;
 
-$webtools-default-margin-big: 24px !default;     // default margin to be applied
-$webtools-default-margin-normal: 0.88rem !default;     // default margin to be applied
-
+// default margins
+$webtools-default-margin-big: 24px !default;
+$webtools-default-margin-normal: 0.88rem !default;
 
 // default fonts and colors
 // - fonts: https://modernfontstacks.com/
