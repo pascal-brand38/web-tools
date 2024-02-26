@@ -13,7 +13,7 @@ $webtools-secondary-background-color: #95bd0f;
 $webtools-tertiary-background-color: #84a80d;
 
 // fonts
-$webtools-secondary-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;    // Handwritten from https://modernfontstacks.com/
+$webtools-secondary-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive; // Handwritten from https://modernfontstacks.com/
 $webtools-tertiary-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 
 @import "webtools/utility/reset.scss";
@@ -24,139 +24,76 @@ code {
   display: block;
 }
 
-.local-grid-2{
+.local-grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 10px;
 }
+
 .code {
   border: 2px solid black;
 }
 
-.tabs {
-  position: relative;
-  margin: 3rem 0;
-  background: #1abc9c;
-  height: auto;
-  display: flex;
+// inspired by https://stackoverflow.com/questions/44199927/css-same-height-for-tabbed-sections
 
-}
-.tabs::before,
-.tabs::after {
-  content: "";
-  display: table;
-}
-.tabs::after {
-  clear: both;
-}
-.tab {
-  float: left;
-}
-.tab-switch {
-  visibility: hidden;
-}
-.tab-label {
-  position: relative;
-  display: block;
-  line-height: 2.75em;
-  height: 3em;
-  padding: 0 1.618em;
-  background: #1abc9c;
-  border-right: 0.125rem solid #16a085;
-  color: #fff;
-  cursor: pointer;
-  top: 0;
-  transition: all 0.25s;
-}
-.tab-label:hover {
-  top: -0.25rem;
-  transition: top 0.25s;
-}
-.tab-content {
-  //height: 12rem;
-  display: block; /* undo "display: none;" */
-  visibility: visible;
-
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-  top: 2.75em;
-  left: 0;
-  padding: 1.618rem;
-  background: #fff;
-  color: #2c3e50;
-  border-bottom: 0.25rem solid #bdc3c7;
-  opacity: 0;
-  transition: all 0.35s;
-}
-.tab-switch:checked + .tab-label {
-  visibility: visible;
-
-  background: #fff;
-  color: #2c3e50;
-  border-bottom: 0;
-  border-right: 0.125rem solid #fff;
-  transition: all 0.35s;
-  z-index: 1;
-  top: -0.0625rem;
-}
-.tab-switch:checked + label + .tab-content {
-  z-index: 2;
-  opacity: 1;
-  transition: all 0.35s;
-}
-
-
-// from https://stackoverflow.com/questions/44199927/css-same-height-for-tabbed-sections
-
-article {
+.webtools-tabs {
+  // tabs content is a flex, each content being 100% width, with a translation
+  // to show the selected content tab
+  // ==> overflow is hidden to hide the unselected content tabs
   overflow: hidden;
-}
 
-article nav label input {
-  display: none;
-}
+  // webtools-tabs--bar is the bar of all tabs (up-to-4)
+  &--bar {
+    width: 100%;
+    background: lightgreen;
 
-article nav {
-  width: 100%;
-  background: lightgreen;
-}
+    // label in the bar is the tab title
+    label {
+      display: inline-block;
+      padding: 3px 10px;
 
-article nav label {
-  display: inline-block;
-  padding: 3px 10px;
-}
+      // style of the tab title of the one which is selected
+      &:has(input:checked) {
+        border: 2px solid blue;
+      }
+    }
 
-article > div {
-  display: flex;
-  width: 400%;
-  transition: transform 1s;           /* added to animate the slide */
-}
+    // input is used to select a tab - up to 4
+    // this is a radio, so no display - label will do the job
+    input {
+      display: none;
+    }
 
-article section {
-  width: 100%;
-  padding: 3px 10px;
-  box-sizing: border-box;
-  background: lightblue;
-}
+  }
 
-article nav:has(input[id^='tab1-']:checked) ~ div {
-  transform: translateX(0);
-}
+  &--all-tabs-contents {
+    display: flex;
+    width: 400%;
+    transition: transform 1s;  /* added to animate the slide */
+  }
 
-article nav:has(input[id^='tab2-']:checked) ~ div {
-  transform: translateX(-25%);
-}
+  &--one-tab-content {
+    width: 100%;
+    padding: 3px 10px;
+    box-sizing: border-box;
+    background: lightblue;
+  }
 
-article nav:has(input[id^='tab3-']:checked) ~ div {
-  transform: translateX(-50%);
-}
+  nav:has(input[id^='tab1-']:checked)~div {
+    transform: translateX(0);
+  }
 
-article nav:has(input[id^='tab4-']:checked) ~ div {
-  transform: translateX(-75%);
-}
+  nav:has(input[id^='tab2-']:checked)~div {
+    transform: translateX(-25%);
+  }
 
-label:has(input:checked) {
-  border: 2px solid blue;
+  nav:has(input[id^='tab3-']:checked)~div {
+    transform: translateX(-50%);
+  }
+
+  nav:has(input[id^='tab4-']:checked)~div {
+    transform: translateX(-75%);
+  }
+
 
 }

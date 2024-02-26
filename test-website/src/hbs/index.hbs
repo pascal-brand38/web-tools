@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webtools</title>
 
-  <link href="css/webtools-site-min.css?{{{WEBTOOLS_FILE_VERSION}}}" type="text/css" rel="stylesheet" media="all"/>
+  <link href="css/webtools-site-min.css?{{{WEBTOOLS_FILE_VERSION}}}" type="text/css" rel="stylesheet" media="all" />
 
   <style>
-    {{>index-min.css.hbs }}
+    {{>index-min.css.hbs}}
   </style>
 
 </head>
@@ -48,39 +48,6 @@
     </p>
 
     <div class="local-grid-2">
-      <div style="width: fit-content; block-size: fit-content; margin:auto;">
-        <div class="webtools-neon webtools-secondary-font-family webtools-font-size-190-bold">
-          Neon <br> Effect
-        </div>
-      </div>
-      <div>
-        <div>
-          <div class="code">
-            <div style="position: relative; left: 10px; top: -10px;"> PASCAL </div>
-          <pre  style="position: relative;">
-// colors of the neon
-$webtools-neon-R: 0;
-$webtools-neon-G: 0;
-$webtools-neon-B: 255;
-// animation speed
-$webtools-neon-speed: 0.50s !default;
-@import "webtools/composition/neon.scss";
-          </pre>
-        </div>
-        </div>
-        <div>
-          <pre>
-&lt;div class="webtools-neon"&gt;
-  Neon &lt;br&gt; Effect
-&lt;/div&gt;
-              </pre>
-        </div>
-      </div>
-
-    </div>
-
-
-    <div class="local-grid-2">
       <!-- the effect to demonstrate -->
       <div style="width: fit-content; block-size: fit-content; margin:auto;">
         <div class="webtools-neon webtools-secondary-font-family webtools-font-size-190-bold">
@@ -88,53 +55,50 @@ $webtools-neon-speed: 0.50s !default;
         </div>
       </div>
 
-      <!-- the code - tabs from https://codepen.io/alvarotrigo/pen/QWqXYmG -->
-<article>
-  <nav>
-    <!-- added inputs and labels for this demo -->
-    <label for="tab1-1">hbs / html
-      <input type="radio" name="radiotabs1" id="tab1-1" checked>
-    </label>
+      <!-- the related code -->
+      <div class="webtools-tabs">
+        <nav class="webtools-tabs--bar">
+          <!-- added inputs and labels for this demo -->
+          <label for="tab1-1">hbs / html
+            <input type="radio" name="radiotabs1" id="tab1-1" checked>
+          </label>
 
-    <label for="tab2-1">scss
-      <input type="radio" name="radiotabs1" id="tab2-1">
-    </label>
+          <label for="tab2-1">scss
+            <input type="radio" name="radiotabs1" id="tab2-1">
+          </label>
 
-    <label for="tab3-1">js
-      <input type="radio" name="radiotabs1" id="tab3-1">
-    </label>
+          <label for="tab3-1">js
+            <input type="radio" name="radiotabs1" id="tab3-1">
+          </label>
 
-    <label for="tab4-1">
-      <input type="radio" name="radiotabs1" id="tab4-1">
-    </label>
-  </nav>
+        </nav>
 
-  <!-- this extra wapper is needed to solve this without script -->
-  <div>
-    <section>
-<pre>
-&lt;div class="webtools-neon"&gt;
-  Neon &lt;br&gt; Effect
-&lt;/div&gt;
-</pre>
-    </section>
-    <section>
-          <pre>
-// colors of the neon
-$webtools-neon-R: 0;
-$webtools-neon-G: 0;
-$webtools-neon-B: 255;
-// animation speed
-$webtools-neon-speed: 0.50s !default;
-@import "webtools/composition/neon.scss";
-          </pre>
-    </section>
-    <section>
-    </section>
-    <section>
-    </section>
-  </div>
-</article>
+        <!-- this extra wapper is needed to solve this without script -->
+        <div class="webtools-tabs--all-tabs-contents">
+          <div class="webtools-tabs--one-tab-content">
+            <code>
+              &lt;div class="webtools-neon"&gt;<br>
+              &nbsp;&nbsp;  Neon &lt;br&gt; Effect<br>
+              &lt;/div&gt;<br>
+            </code>
+          </div>
+          <div class="webtools-tabs--one-tab-content">
+            <code>
+              // colors of the neon<br>
+              $webtools-neon-R: 0;<br>
+              $webtools-neon-G: 0;<br>
+              $webtools-neon-B: 255;<br>
+              // animation speed<br>
+              $webtools-neon-speed: 0.50s !default;<br>
+              @import "webtools/composition/neon.scss";
+            </code>
+          </div>
+          <div class="webtools-tabs--one-tab-content">
+          </div>
+          <div class="webtools-tabs--one-tab-content">
+          </div>
+        </div>
+      </div>
 
     </div>
 
@@ -152,37 +116,33 @@ $webtools-neon-speed: 0.50s !default;
       </div>
 
       <!-- the code - tabs from https://codepen.io/alvarotrigo/pen/QWqXYmG -->
-<article>
-  <nav>
-    <!-- added inputs and labels for this demo -->
-    <label for="tab1-2">hbs / html
-      <input type="radio" name="radiotabs2" id="tab1-2">
-    </label>
+      <div class="webtools-tabs">
+        <nav class="webtools-tabs--bar">
+          <!-- added inputs and labels for this demo -->
+          <label for="tab1-2">hbs / html
+            <input type="radio" name="radiotabs2" id="tab1-2">
+          </label>
 
-    <label for="tab2-2">scss
-      <input type="radio" name="radiotabs2" id="tab2-2" checked>
-    </label>
+          <label for="tab2-2">scss
+            <input type="radio" name="radiotabs2" id="tab2-2" checked>
+          </label>
 
-    <label for="tab3-2">js
-      <input type="radio" name="radiotabs2" id="tab3-2">
-    </label>
+          <label for="tab3-2">js
+            <input type="radio" name="radiotabs2" id="tab3-2">
+          </label>
+        </nav>
 
-    <label for="tab4-2">
-      <input type="radio" name="radiotabs2" id="tab4-2">
-    </label>
-  </nav>
-
-  <!-- this extra wapper is needed to solve this without script -->
-  <div>
-    <section id="stab1">
-<pre>
+        <!-- this extra wapper is needed to solve this without script -->
+        <div class="webtools-tabs--all-tabs-contents">
+          <div class="webtools-tabs--one-tab-content">
+            <pre>
 &lt;div class="webtools-neon"&gt;
   Neon &lt;br&gt; Effect
 &lt;/div&gt;
 </pre>
-    </section>
-    <section id="stab2">
-          <pre>
+          </div>
+          <div class="webtools-tabs--one-tab-content">
+            <pre>
 // colors of the neon
 $webtools-neon-R: 0;
 $webtools-neon-G: 0;
@@ -191,25 +151,22 @@ $webtools-neon-B: 255;
 $webtools-neon-speed: 0.50s !default;
 @import "webtools/composition/neon.scss";
           </pre>
-    </section>
-    <section id="stab3">
-    </section>
-    <section id="stab4">
-    </section>
-  </div>
-</article>
+          </div>
+          <div class="webtools-tabs--one-tab-content">
+          </div>
+          <div class="webtools-tabs--one-tab-content">
+          </div>
+        </div>
+      </div>
 
     </div>
 
 
     </div>
 
-<p>
-  TOTO
-</p>
 
 
-  </section>
+    </div>
 </body>
 
 </html>
