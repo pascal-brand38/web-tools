@@ -50,7 +50,10 @@
     <div class="local-grid-2">
       <!-- the effect to demonstrate -->
       <div style="width: fit-content; block-size: fit-content; margin:auto;">
-        <div class="webtools-neon webtools-secondary-font-family webtools-font-size-190-bold">
+        <div class="webtools-neon webtools-secondary-font-family webtools-font-size-190-bold"
+            style="--webtools-neon-RGB: 0, 0, 255;
+                   --webtools-neon-speed: 0.50s;
+                   --webtools-neon-rotate: -30deg;">
           Neon <br> Effect
         </div>
       </div>
@@ -77,19 +80,16 @@
         <div class="webtools-tabs--all-tabs-contents">
           <div class="webtools-tabs--one-tab-content">
             <code>
-              &lt;div class="webtools-neon"&gt;<br>
+              &lt;div class="webtools-neon" <br>
+              &nbsp;&nbsp; style="--webtools-neon-RGB: 0, 0, 255;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp; --webtools-neon-speed: 0.50s;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp; --webtools-neon-rotate: -30deg;"&gt;<br>
               &nbsp;&nbsp;  Neon &lt;br&gt; Effect<br>
               &lt;/div&gt;<br>
             </code>
           </div>
           <div class="webtools-tabs--one-tab-content">
             <code>
-              // colors of the neon<br>
-              $webtools-neon-R: 0;<br>
-              $webtools-neon-G: 0;<br>
-              $webtools-neon-B: 255;<br>
-              // animation speed<br>
-              $webtools-neon-speed: 0.50s !default;<br>
               @import "webtools/composition/neon.scss";
             </code>
           </div>

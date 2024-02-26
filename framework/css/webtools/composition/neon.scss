@@ -13,17 +13,15 @@
 // and https://codepen.io/markheggan/pen/LjrVYN
 
 
-$webtools-neon: true !default;          // when false, nothing is declared
-$webtools-neon-R: 255 !default;         // RGB color
-$webtools-neon-G: 0   !default;
-$webtools-neon-B: 0   !default;
-$webtools-neon-speed: 0.25s !default;   // animation speed
-
+$webtools-neon: true !default;                                      // when false, nothing is declared
+$webtools-neon-RGB: var(--webtools-neon-RGB, 255, 0, 0) !default;   // RGB color
+$webtools-neon-speed: var(--webtools-neon-speed, 0.25s) !default;   // blinking speed
+$webtools-neon-rotate: var(--webtools-neon-rotate, -20deg) !default;   // blinking speed
 
 @if ($webtools-neon) {
   .webtools-neon {
-      transform: rotate(-20deg);
-      color: rgb($webtools-neon-R, $webtools-neon-G, $webtools-neon-B);
+      transform: rotate($webtools-neon-rotate);
+      color: rgb($webtools-neon-RGB);
       animation:
           webtools-neon-keyframes
           $webtools-neon-speed
@@ -36,19 +34,19 @@ $webtools-neon-speed: 0.25s !default;   // animation speed
       text-shadow:
       0 0 6px rgba(202,228,225,0.92),
       0 0 30px rgba(202,228,225,0.34),
-      0 0 12px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 0.32),
-      0 0 21px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 0.72),
-      0 0 34px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 0.58),
-      0 0 54px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 0.72);
+      0 0 12px rgba($webtools-neon-RGB, 0.32),
+      0 0 21px rgba($webtools-neon-RGB, 0.72),
+      0 0 34px rgba($webtools-neon-RGB, 0.58),
+      0 0 54px rgba($webtools-neon-RGB, 0.72);
     }
     to {
       text-shadow:
       0 0 6px rgba(202,228,225,0.98),
       0 0 30px rgba(202,228,225,0.42),
-      0 0 12px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 0.58),
-      0 0 22px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 0.84),
-      0 0 38px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 0.88),
-      0 0 60px rgba($webtools-neon-R, $webtools-neon-G, $webtools-neon-B, 1);
+      0 0 12px rgba($webtools-neon-RGB, 0.58),
+      0 0 22px rgba($webtools-neon-RGB, 0.84),
+      0 0 38px rgba($webtools-neon-RGB, 0.88),
+      0 0 60px rgba($webtools-neon-RGB, 1);
     }
   }
 }
