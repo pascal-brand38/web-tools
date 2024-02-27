@@ -56,19 +56,21 @@
     background: lightblue;
   }
 
-  nav:has(>label input[id^='tab1-']:checked)~div {
+  // select the correct flex to be displayed
+  // get input is selected, and apply transformation to the flex container, i.e. class .webtools-tabs--all-tabs-contents
+  nav:has(>label input[id^='webtools-tab1-']:checked) ~ .webtools-tabs--all-tabs-contents {
     transform: translateX(0);
   }
 
-  nav:has(>label input[id^='tab2-']:checked)~div {
+  nav:has(>label input[id^='webtools-tab2-']:checked) ~ .webtools-tabs--all-tabs-contents {
     transform: translateX(-25%);
   }
 
-  nav:has(>label input[id^='tab3-']:checked)~div {
+  nav:has(>label input[id^='webtools-tab3-']:checked) ~ .webtools-tabs--all-tabs-contents {
     transform: translateX(-50%);
   }
 
-  nav:has(>label input[id^='tab4-']:checked)~div {
+  nav:has(>label input[id^='webtools-tab4-']:checked) ~ .webtools-tabs--all-tabs-contents {
     transform: translateX(-75%);
   }
 }

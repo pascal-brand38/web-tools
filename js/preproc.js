@@ -38,6 +38,7 @@ function createPreprocVariables(args) {
   args.handlebarswax = handlebarsWax(handlebars, hboptions)
     .helpers(hbHelpers)
     .helpers(args.siteRootdir + '/src/gulp-config/handlebars-helpers.js')
+    .helpers('./framework/handlebars-helpers.js')
     .data(args.preprocVariables)
     .data(args.gulpConfig['index.hbs'])
 }

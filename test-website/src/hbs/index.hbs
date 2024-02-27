@@ -62,23 +62,7 @@
 
       <!-- the related code -->
       <div class="webtools-tabs">
-        <nav class="webtools-tabs--bar">
-          <!-- added inputs and labels for this demo -->
-          <label for="tab1-1">hbs / html
-            <input type="radio" name="radiotabs1" id="tab1-1" checked>
-          </label>
-
-          <label for="tab2-1">scss
-            <input type="radio" name="radiotabs1" id="tab2-1">
-          </label>
-
-          <label for="tab3-1">js
-            <input type="radio" name="radiotabs1" id="tab3-1">
-          </label>
-
-        </nav>
-
-        <!-- this extra wapper is needed to solve this without script -->
+        {{{webtoolsTabsBar tab1='hbs / html' tab2='scss' tab3='js' }}}
         <div class="webtools-tabs--all-tabs-contents">
           <div class="webtools-tabs--one-tab-content">
             <code>
@@ -98,13 +82,52 @@
               @import "webtools/composition/neon.scss";
             </code>
           </div>
-          <div class="webtools-tabs--one-tab-content"> No JS is required </div>
+          <div class="webtools-tabs--one-tab-content"> // No JS is required </div>
+          <div class="webtools-tabs--one-tab-content"> </div>
+        </div>
+      </div>
+
+      <!-- the effect to demonstrate -->
+      <div class="webtools-secondary-font-family webtools-font-size-190-bold" style="width: fit-content; block-size: fit-content; margin:auto;">
+        <div class="webtools-neon"
+            style="--webtools-neon-RGB: 0, 0, 255;
+                   --webtools-neon-speed: 0.50s;
+                   --webtools-neon-rotate: -30deg;">
+          Neon
+        </div>
+        <div class="webtools-neon">
+          Effect
+        </div>
+      </div>
+
+      <!-- the related code -->
+      <div class="webtools-tabs">
+        {{{webtoolsTabsBar tab1='hbs / html' tab2='scss' tab3='js' }}}
+        <div class="webtools-tabs--all-tabs-contents">
+          <div class="webtools-tabs--one-tab-content">
+            <code>
+              &lt;div class="webtools-neon" <br>
+              &nbsp;&nbsp; style="--webtools-neon-RGB: 0, 0, 255;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp; --webtools-neon-speed: 0.50s;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp; --webtools-neon-rotate: -30deg;"&gt;<br>
+              &nbsp;&nbsp;  Neon<br>
+              &lt;/div&gt;<br>
+              &lt;div class="webtools-neon" <br>
+              &nbsp;&nbsp;  Effect<br>
+              &lt;/div&gt;
+            </code>
+          </div>
+          <div class="webtools-tabs--one-tab-content">
+            <code>
+              @import "webtools/composition/neon.scss";
+            </code>
+          </div>
+          <div class="webtools-tabs--one-tab-content"> // No JS is required </div>
           <div class="webtools-tabs--one-tab-content"> </div>
         </div>
       </div>
 
     </div>
-
 
   </section>
 </body>
