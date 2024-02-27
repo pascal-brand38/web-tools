@@ -5,9 +5,12 @@
 //    neon effect on text
 //
 // Example:
-//    <div class="webtools-neon">
-//        Neon <br> Effect
-//    </div>
+//    hbs:
+//      <div class="webtools-neon">
+//          Neon <br> Effect
+//      </div>
+//    scss:
+//      @import "webtools/composition/neon.scss";
 //
 // from https://freefrontend.com/css-glow-text-effects/
 // and https://codepen.io/markheggan/pen/LjrVYN

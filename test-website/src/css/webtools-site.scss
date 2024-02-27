@@ -19,6 +19,7 @@ $webtools-tertiary-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Co
 @import "webtools/utility/reset.scss";
 @import "webtools/layout/layout.scss";
 @import "webtools/utility/atomic.scss";
+@import "webtools/composition/tabs.scss";
 
 code {
   display: block;
@@ -32,68 +33,4 @@ code {
 
 .code {
   border: 2px solid black;
-}
-
-// inspired by https://stackoverflow.com/questions/44199927/css-same-height-for-tabbed-sections
-
-.webtools-tabs {
-  // tabs content is a flex, each content being 100% width, with a translation
-  // to show the selected content tab
-  // ==> overflow is hidden to hide the unselected content tabs
-  overflow: hidden;
-
-  // webtools-tabs--bar is the bar of all tabs (up-to-4)
-  &--bar {
-    width: 100%;
-    background: lightgreen;
-
-    // label in the bar is the tab title
-    label {
-      display: inline-block;
-      padding: 3px 10px;
-
-      // style of the tab title of the one which is selected
-      &:has(input:checked) {
-        border: 2px solid blue;
-      }
-    }
-
-    // input is used to select a tab - up to 4
-    // this is a radio, so no display - label will do the job
-    input {
-      display: none;
-    }
-
-  }
-
-  &--all-tabs-contents {
-    display: flex;
-    width: 400%;
-    transition: transform 1s;  /* added to animate the slide */
-  }
-
-  &--one-tab-content {
-    width: 100%;
-    padding: 3px 10px;
-    box-sizing: border-box;
-    background: lightblue;
-  }
-
-  nav:has(input[id^='tab1-']:checked)~div {
-    transform: translateX(0);
-  }
-
-  nav:has(input[id^='tab2-']:checked)~div {
-    transform: translateX(-25%);
-  }
-
-  nav:has(input[id^='tab3-']:checked)~div {
-    transform: translateX(-50%);
-  }
-
-  nav:has(input[id^='tab4-']:checked)~div {
-    transform: translateX(-75%);
-  }
-
-
 }
