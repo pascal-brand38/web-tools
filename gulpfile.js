@@ -9,7 +9,6 @@ const { series, parallel } = require('gulp');
 const { buildHtml } = require('./js/buildHtml')
 const { buildCss } = require('./js/buildCss')
 const { buildJs } = require('./js/buildJs')
-const { buildImg } = require('./js/buildImg')
 const { build3rdParties } = require('./js/build3rdParties')
 const { buildRootDir } = require('./js/buildRootDir')
 const { buildPhp } = require('./js/buildPhp')
@@ -52,6 +51,13 @@ function getArgs(argv) {
         required: false,
         boolean: true,
       },
+      "locals": {
+        description: "build local specific resources",
+        default: true,
+        requiresArg: false,
+        required: false,
+        boolean: true,
+      },
     })
     .argv;
 }
@@ -61,6 +67,7 @@ async function initTask() {
   args.siteRootdir = options['site-root-dir']
   args.dbg = options['dbg']
   args.w3c = options['w3c']
+  args.locals = options['locals']
 
   args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/src/gulp-config/gulp-config.json', 'utf8'))
   if (args.gulpConfig.config.relativeDst) {
@@ -87,10 +94,16 @@ function helloworldTask(cb) {
   cb()
 }
 
+const buildLocalsTask = async (cb) => {
+  if (args.locals) {
+    const { buildLocals } = require('./' + args.siteRootdir + '/src/gulp-config/buildLocals.js')
+    await buildLocals(args, cb)
+  }
+}
+
 const buildHtmlTask = (cb) => buildHtml(args, cb)
 const buildCssTask = (cb) => buildCss(args, cb)
 const buildJsTask = (cb) => buildJs(args, cb)
-const buildImgTask = (cb) => buildImg(args, cb)
 const build3rdPartiesTask = (cb) => build3rdParties(args, cb)
 const buildRootDirTask = (cb) => buildRootDir(args, cb)
 const buildPhpTask = (cb) => buildPhp(args, cb)
@@ -100,11 +113,9 @@ const buildValidateTask = (cb) => buildValidate(args, cb)
 // run helloworld task using:  gulp helloworld
 exports.helloworld = helloworldTask
 
-exports.buildImg = series(initTask, buildImgTask)
-exports.buildRootDir = series(initTask, buildRootDirTask)
-
 exports.default = series(
   parallel(initTask),
+  buildLocalsTask,
   parallel(buildCssTask, buildJsTask, build3rdPartiesTask, buildPhpTask, buildRootDirTask),
   buildHtmlTask,
   buildValidateTask,

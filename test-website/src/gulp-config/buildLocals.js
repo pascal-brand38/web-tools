@@ -3,4 +3,4 @@ function buildLocalImg(args, done) {
   done()
 }
 
-exports.buildLocalImg = buildLocalImg;
+exports.buildLocals = buildLocalImg;

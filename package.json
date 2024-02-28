@@ -22,7 +22,6 @@
   "version": "1.0.0",
   "scripts": {
     "build": "gulp",
-    "build:img": "gulp buildImg",
     "deploy": "gh-pages -d test-website/dist",
     "helloworld": "gulp helloworld",
     "test": "echo \"Error: no test specified\" && exit 1"
