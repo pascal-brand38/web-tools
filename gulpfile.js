@@ -29,6 +29,9 @@ function getArgs(argv) {
     .usage('Build web site using web-tools')
     .help('help').alias('help', 'h')
     .version('version', '1.0').alias('version', 'V')
+    .parserConfiguration({
+      'unknown-options-as-args': true   // produce '_' key with all unknown args
+    })
     .options({
       "site-root-dir": {
         description: "root directory of the site. Default is test-website",
@@ -68,6 +71,11 @@ async function initTask() {
   args.dbg = options['dbg']
   args.w3c = options['w3c']
   args.locals = options['locals']
+
+  if (options._.length != 0) {
+    getArgs([process.argv[0], process.argv[1], '--help'])   // show the help
+    throw('STOP')
+  }
 
   args.gulpConfig = await JSON.parse(fs.readFileSync(args.siteRootdir + '/src/gulp-config/gulp-config.json', 'utf8'))
   if (args.gulpConfig.config.relativeDst) {
