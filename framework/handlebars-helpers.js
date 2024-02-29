@@ -35,22 +35,6 @@ function webtoolsTabsBar(args) {
   })
   result += `</nav>\n`
 
-  /*
-  result += `<nav class="webtools-tabs--bar">\n`
-  result += `  <label for="tab1-1">hbs / html\n`
-  result += `    <input type="radio" name="radiotabs1" id="tab1-1" checked>\n`
-  result += `  </label>\n`
-  result += `\n`
-  result += `  <label for="tab2-1">scss\n`
-  result += `    <input type="radio" name="radiotabs1" id="tab2-1">\n`
-  result += `  </label>\n`
-  result += `\n`
-  result += `  <label for="tab3-1">js\n`
-  result += `    <input type="radio" name="radiotabs1" id="tab3-1">\n`
-  result += `  </label>\n`
-  result += `</nav>\n`
-  */
-
   return result
 }
 exports.webtoolsTabsBar = webtoolsTabsBar
