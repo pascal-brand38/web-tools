@@ -21,6 +21,7 @@ async function w3cMarkupValidate(ext, str, excludeList) {
     results = await validator(validatorOptions)
     results = results.messages
   } else if (ext === '.css') {
+    await new Promise(r => setTimeout(r, 1000));    // wait for 1sec as told in https://jigsaw.w3.org/css-validator/manual.html
     results = await cssValidator.validateText(str);
     results = results.errors
   } else {
@@ -39,25 +40,22 @@ async function buildValidateMarkup(args) {
   const excludeList = args.gulpConfig.w3cMarkupValidate
 
   const dir = args.siteRootdir + '/' + args.relativeDst
-  const files = fs.readdirSync(dir, { recursive: true })
+  const files = fs.readdirSync(dir, { recursive: true }).filter(file => ['.html', '.css'].includes(path.extname(file)))
 
-  const allErrors = await Promise.all(files.map(async (file) => {
-    let errors = []
-    const ext = path.extname(file)
-    if ((ext === '.html') || (ext === '.css')) {
-      const fullPath = path.join(dir, file)
-      const content = fs.readFileSync(fullPath).toString()
-      errors = await w3cMarkupValidate(ext, content, excludeList)
+  let allErrors = []
+  for (const index in files) {
+    const file = files[index]
+    console.log(file)
+    const fullPath = path.join(dir, file)
+    const content = fs.readFileSync(fullPath).toString()
+    const errors = await w3cMarkupValidate(path.extname(file), content, excludeList)
+    if ((errors) && (errors.length != 0)) {
+      allErrors.push({ file: file, errors: errors })
     }
+  }
 
-      if ((errors) && (errors.length != 0)) {
-      return { file: file, errors: errors }
-      }
-  }))
-
-  const errors = allErrors.filter(r => r!==undefined)
-  if (errors.length != 0) {
-    const msg = JSON.stringify(errors, null, 2)
+  if (allErrors.length != 0) {
+    const msg = JSON.stringify(allErrors, null, 2)
     if (args.dbg) {
       console.log(msg)
     } else {
