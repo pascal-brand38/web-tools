@@ -61,11 +61,13 @@ function preprocHandlebars(args, file) {
   let localFunctions = require('../' + args.siteRootdir + '/src/gulp-config/locals.js')
   const localPreprocVariables = localFunctions.localPreprocVariables(file)
 
-  let template = args.handlebarswax
-  .partials(args.siteRootdir + '/src/partials/*')
-  .partials(args.siteRootdir + '/tmp/*')
-    .compile(file.contents.toString())
-  file.contents = Buffer.from(template({...args.gulpConfig.preprocVariables[file.basename], ...localPreprocVariables}))
+  for (let i = 0; i < 3; i++) {
+    let template = args.handlebarswax
+      .partials(args.siteRootdir + '/src/partials/*')
+      .partials(args.siteRootdir + '/tmp/*')
+      .compile(file.contents.toString())
+    file.contents = Buffer.from(template({...args.gulpConfig.preprocVariables[file.basename], ...localPreprocVariables}))
+  }
 }
 
 exports.preprocHandlebars = preprocHandlebars
