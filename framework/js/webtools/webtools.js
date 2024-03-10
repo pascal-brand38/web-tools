@@ -97,7 +97,7 @@ if ('serviceWorker' in navigator) {
     }, function(err) {
       // registration failed :(
       console.log('ServiceWorker registration failed: ', err);
-      console.log(`Cannot open file service_worker-min${_dot}js`);
+      console.log('Cannot open file service_worker-min(dot)js');    // IE11 does not understand `` notation
     });
   });
 }
