@@ -58,6 +58,9 @@ function webtools_onload() {
 }
 window.onload = webtools_onload;
 
+/*
+PWA support is commented, as it is not really useful
+
 let _dot = '.'
 
 // Service workers
@@ -67,11 +70,12 @@ if ('serviceWorker' in navigator) {
       // Registration was successful
     }, function(err) {
       // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+        console.log('ServiceWorker registration failed: ', err);
       console.log('Cannot open file service_worker-min(dot)js');    // IE11 does not understand `` notation
     });
   });
 }
+*/
 
 /*
  * feature support by the browser
