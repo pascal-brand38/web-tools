@@ -56,22 +56,25 @@ function webtools_onload() {
     webtools_onload_all_html();
   }
 }
+
+function service_worker(dot) {
+  // Service workers
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('service_worker-min' + dot + 'js').then(function(registration) {
+        // Registration was successful
+      }, function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+        console.log('Cannot open file service_worker-min(dot)js');    // IE11 does not understand `` notation
+      });
+    });
+  }
+}
+
 window.onload = webtools_onload;
 
-let _dot = '.'
-
-// Service workers
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('service_worker-min' + _dot + 'js').then(function(registration) {
-      // Registration was successful
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-      console.log('Cannot open file service_worker-min(dot)js');    // IE11 does not understand `` notation
-    });
-  });
-}
+service_worker('.')
 
 /*
  * feature support by the browser
