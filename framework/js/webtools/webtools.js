@@ -3,35 +3,6 @@
 //
 // Initialize the JS framework
 
-// load defered image
-// it looks at all <img> and <source> that have an inherited class (for example a picture) of 'priority_class'
-// for exanple, in the html
-//    <picture class="webtools-img-priority2">
-//      <source type="image/webp" data-srcset="img/210729-vrac-04-256 . webp"> <!-- screen up to 366px (70% of 256) -->
-//      <source type="image/jpeg" data-srcset="img/210729-vrac-04-256 . jpg" >
-//      <img srcset="img/thumb-128x59 . png" data-src="img/210729-vrac-04-512 . jpg">
-//    </picture>
-// and the JS calling at onload event
-//    webtools_load_deferred_images('webtools-img-priority2');
-function webtools_load_deferred_images(priority_class) {
-  var prio = document.getElementsByClassName(priority_class);
-
-  for (var element=0; element<prio.length; element++) {
-    var imgDefer = prio[element].getElementsByTagName('img');
-    for (var i=0; i<imgDefer.length; i++) {
-      if(imgDefer[i].getAttribute('data-src')) {
-        imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
-      }
-    }
-
-    var sourceDefer = prio[element].getElementsByTagName('source');    /// try picture.source  or  picture source  as tags
-    for (var i=0; i<sourceDefer.length; i++) {
-      if(sourceDefer[i].getAttribute('data-srcset')) {
-        sourceDefer[i].setAttribute('srcset',sourceDefer[i].getAttribute('data-srcset'));
-      }
-    }
-  }
-}
 
 // From   https://stackoverflow.com/questions/38156388/delay-javascript-loading
 function webtools_load_js(url, async, defer) {
@@ -146,4 +117,41 @@ function webtools_add_support_webp(feature) {
       document.body.classList.add('webtools-support-no-webp-' + feature);
     }
   });
+}
+
+
+// load defered image
+// it looks at all <img> and <source> that have an inherited class (for example a picture) of 'priority_class'
+// for exanple, in the html
+//    <picture class="webtools-img-priority2">
+//      <source type="image/webp" data-srcset="img/210729-vrac-04-256 . webp"> <!-- screen up to 366px (70% of 256) -->
+//      <source type="image/jpeg" data-srcset="img/210729-vrac-04-256 . jpg" >
+//      <img srcset="img/thumb-128x59 . png" data-src="img/210729-vrac-04-512 . jpg">
+//    </picture>
+// and the JS calling at onload event
+//    webtools_load_deferred_images('webtools-img-priority2');
+function webtools_load_deferred_images(priority_class) {
+  webtools_check_support_webp('lossy', function(feature, webp_supported)  {
+    var prio = document.getElementsByClassName(priority_class);
+
+    for (var element=0; element<prio.length; element++) {
+      var imgDefer = prio[element].getElementsByTagName('img');
+      for (var i=0; i<imgDefer.length; i++) {
+        if(imgDefer[i].getAttribute('data-src')) {
+          console.log(`data-src ${imgDefer[i].getAttribute('data-src')}`)
+          imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
+        }
+        if((!webp_supported) && (imgDefer[i].getAttribute('data-src-webp-not-supported'))) {
+          imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src-webp-not-supported'));
+        }
+      }
+
+      var sourceDefer = prio[element].getElementsByTagName('source');    /// try picture.source  or  picture source  as tags
+      for (var i=0; i<sourceDefer.length; i++) {
+        if(sourceDefer[i].getAttribute('data-srcset')) {
+          sourceDefer[i].setAttribute('srcset',sourceDefer[i].getAttribute('data-srcset'));
+        }
+      }
+    }
+  })
 }
