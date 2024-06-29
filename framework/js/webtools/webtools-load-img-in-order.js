@@ -67,7 +67,7 @@ function webtools_load_img_in_order() {
       if (imgDefer[j].getAttribute('data-src')) {
         imgDefer[j].setAttribute('src', imgDefer[j].getAttribute('data-src'));
         imgDefer[j].removeAttribute('data-src');
-        imgDefer[j].setAttribute('onload', 'webtools_load_img_in_order');
+        imgDefer[j].setAttribute('onload', 'webtools_load_img_in_order()');
         _startLoading()
         if (!_continueLoading()) {
           return
