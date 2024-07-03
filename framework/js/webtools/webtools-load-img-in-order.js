@@ -27,14 +27,16 @@ function _continueLoading() {         // should we load another one, or wait for
   return (_nLoadingInOrder <= 6)   // true if one should wait before loading another one
 }
 
+var _webtoolsNClass = 0
+var _webtoolsPicture = 0
 function webtools_load_img_in_order() {
   var prio = document.getElementsByClassName('webtools-img-in-order');
   var found = false
   _loadedCompleted()
 
-  for (var element = 0; element < prio.length; element++) {
+  for (var element = _webtoolsNClass; element < prio.length; element++) {
     var picDefer = prio[element].getElementsByTagName('picture');
-    for (var i = 0; i < picDefer.length; i++) {
+    for (var i = _webtoolsPicture; i < picDefer.length; i++) {
       var imgDefer = picDefer[i].getElementsByTagName('img');
       for (var j = 0; j < imgDefer.length; j++) {
         if (imgDefer[j].getAttribute('data-src')) {
@@ -54,6 +56,8 @@ function webtools_load_img_in_order() {
         }
       }
 
+      _webtoolsPicture = _webtoolsPicture + 1
+
       if (found) {
         _startLoading()
         if (!_continueLoading()) {
@@ -61,18 +65,24 @@ function webtools_load_img_in_order() {
         }
       }
     }
+    _webtoolsPicture = 0
 
     var imgDefer = prio[element].getElementsByTagName('img');
-    for (var j = 0; j < imgDefer.length; j++) {
+    for (var j = _webtoolsPicture; j < imgDefer.length; j++) {
       if (imgDefer[j].getAttribute('data-src')) {
         imgDefer[j].setAttribute('src', imgDefer[j].getAttribute('data-src'));
         imgDefer[j].removeAttribute('data-src');
         imgDefer[j].setAttribute('onload', 'webtools_load_img_in_order()');
+        _webtoolsPicture = _webtoolsPicture + 1
+
         _startLoading()
         if (!_continueLoading()) {
           return
         }
       }
     }
+
+    _webtoolsPicture = 0
+    _webtoolsNClass = _webtoolsNClass + 1
   }
 }
