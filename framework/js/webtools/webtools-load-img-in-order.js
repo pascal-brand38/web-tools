@@ -29,9 +29,11 @@ function _continueLoading() {         // should we load another one, or wait for
 
 var _webtoolsNClass = 0
 var _webtoolsPicture = 0
+var _webtoolsImg = 0
 function webtools_load_img_in_order() {
   var prio = document.getElementsByClassName('webtools-img-in-order');
   var found = false
+  var attr
   _loadedCompleted()
 
   for (var element = _webtoolsNClass; element < prio.length; element++) {
@@ -39,8 +41,9 @@ function webtools_load_img_in_order() {
     for (var i = _webtoolsPicture; i < picDefer.length; i++) {
       var imgDefer = picDefer[i].getElementsByTagName('img');
       for (var j = 0; j < imgDefer.length; j++) {
-        if (imgDefer[j].getAttribute('data-src')) {
-          imgDefer[j].setAttribute('src', imgDefer[j].getAttribute('data-src'));
+        attr = imgDefer[j].getAttribute('data-src')
+        if (attr) {
+          imgDefer[j].setAttribute('src', attr);
           imgDefer[j].removeAttribute('data-src');
           imgDefer[j].setAttribute('onload', 'webtools_load_img_in_order()');
           found = true
@@ -49,9 +52,10 @@ function webtools_load_img_in_order() {
 
       var sourceDefer = picDefer[i].getElementsByTagName('source');    /// try picture.source  or  picture source  as tags
       for (var j = 0; j < sourceDefer.length; j++) {
-        if (sourceDefer[j].getAttribute('data-srcset')) {
-          sourceDefer[j].setAttribute('srcset', sourceDefer[j].getAttribute('data-srcset'));
-          sourceDefer[j].removeAttribute('data-srcset');
+        attr = sourceDefer[j].getAttribute('data-srcset')
+        if (attr) {
+          sourceDefer[j].setAttribute('srcset', attr);
+          sourceDefer[j].removeAttribute('data-src');
           found = true
         }
       }
@@ -65,15 +69,15 @@ function webtools_load_img_in_order() {
         }
       }
     }
-    _webtoolsPicture = 0
 
     var imgDefer = prio[element].getElementsByTagName('img');
-    for (var j = _webtoolsPicture; j < imgDefer.length; j++) {
-      if (imgDefer[j].getAttribute('data-src')) {
-        imgDefer[j].setAttribute('src', imgDefer[j].getAttribute('data-src'));
+    for (var j = _webtoolsImg; j < imgDefer.length; j++) {
+      _webtoolsImg = _webtoolsImg + 1
+      attr = imgDefer[j].getAttribute('data-src')
+      if (attr) {
+        imgDefer[j].setAttribute('src', attr);
         imgDefer[j].removeAttribute('data-src');
         imgDefer[j].setAttribute('onload', 'webtools_load_img_in_order()');
-        _webtoolsPicture = _webtoolsPicture + 1
 
         _startLoading()
         if (!_continueLoading()) {
@@ -81,8 +85,8 @@ function webtools_load_img_in_order() {
         }
       }
     }
-
     _webtoolsPicture = 0
+    _webtoolsImg = 0
     _webtoolsNClass = _webtoolsNClass + 1
   }
 }
