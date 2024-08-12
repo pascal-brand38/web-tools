@@ -20,6 +20,10 @@ form.webtools {
     @media only screen and (max-width: $webtools-size-s-to) {
       margin-left: 0;                       /* no margin on small screen so that the contact form is big enough */
     }
+
+    &__no-display {   // used for honeypot technique, of for language switch
+      display:none;
+    }
   }
 
   input {
